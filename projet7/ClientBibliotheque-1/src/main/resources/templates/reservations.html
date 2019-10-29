@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<link href="style5.css" rel="stylesheet"/>
+<title>Reservation</title>
+</head>
+<body>
+    
+     <div class="login-page">
+		<div class="form">
+			<form class="register-form" th:action="@{findReservation}" method="POST">
+				<input type="text" placeholder="Votre email" name="email" th:value="${reservation.email}"/>
+				<button>Recherche</button>
+			</form>
+		</div>
+		
+	</div>
+    
+</body>
+</html>

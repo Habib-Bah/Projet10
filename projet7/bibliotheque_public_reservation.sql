@@ -1,0 +1,2 @@
+INSERT INTO public.reservation (id, nomutilisateur, prenom, titrelivre, datedebut, datefin, email) VALUES (16, 'Bah', 'Habib', 'La peste', '02/07/2019', '02/08/2019', 'thiernohabibbah@gmail.com');
+INSERT INTO public.reservation (id, nomutilisateur, prenom, titrelivre, datedebut, datefin, email) VALUES (17, 'Cook', 'Lyam', 'Cryno de Bergerac', '02/07/2019', '02/08/2019', 'thiernohabibbah@gmail.com');

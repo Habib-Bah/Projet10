@@ -1,0 +1,15 @@
+INSERT INTO public.livre (id, auteur, titre, nombredepages, nombreexemplaire, categorie) VALUES (18, 'Robert penn warren', 'LES FOUS DU ROI', 500, 15, null);
+INSERT INTO public.livre (id, auteur, titre, nombredepages, nombreexemplaire, categorie) VALUES (19, 'Brest Easton ellis', 'AMERICAN PSYCHO', 500, 10, null);
+INSERT INTO public.livre (id, auteur, titre, nombredepages, nombreexemplaire, categorie) VALUES (20, 'Trunan Capote', 'DE SANG FROID', 400, 15, null);
+INSERT INTO public.livre (id, auteur, titre, nombredepages, nombreexemplaire, categorie) VALUES (21, 'Joris-Karl Huysmans', 'LÀ-BAS', 300, 15, null);
+INSERT INTO public.livre (id, auteur, titre, nombredepages, nombreexemplaire, categorie) VALUES (22, 'Johann Wolfgang', 'FAUST', 450, 15, null);
+INSERT INTO public.livre (id, auteur, titre, nombredepages, nombreexemplaire, categorie) VALUES (23, 'Tenessee Williams', 'UN TRAMWAY NOMMÉ DÉSIR', 500, 15, null);
+INSERT INTO public.livre (id, auteur, titre, nombredepages, nombreexemplaire, categorie) VALUES (24, 'Albert Camus', 'LA PESTE', 400, 15, null);
+INSERT INTO public.livre (id, auteur, titre, nombredepages, nombreexemplaire, categorie) VALUES (25, 'Romain Gary', 'LA VIE DEVANT SOIT', 600, 15, null);
+INSERT INTO public.livre (id, auteur, titre, nombredepages, nombreexemplaire, categorie) VALUES (26, 'Edmon Rostand', 'CRYNO DE BERGERAC', 400, 15, null);
+INSERT INTO public.livre (id, auteur, titre, nombredepages, nombreexemplaire, categorie) VALUES (27, 'Franz Kafka', 'LA METAMORPHOSE', 300, 15, null);
+INSERT INTO public.livre (id, auteur, titre, nombredepages, nombreexemplaire, categorie) VALUES (28, 'J.R.R Tolkien', 'LE SEIGNEUR DES ANNEAUX', 700, 15, null);
+INSERT INTO public.livre (id, auteur, titre, nombredepages, nombreexemplaire, categorie) VALUES (29, 'George Orwell', '1984', 300, 15, null);
+INSERT INTO public.livre (id, auteur, titre, nombredepages, nombreexemplaire, categorie) VALUES (30, 'George Orwell', 'LECUME DES JOURS', 200, 10, null);
+INSERT INTO public.livre (id, auteur, titre, nombredepages, nombreexemplaire, categorie) VALUES (31, 'Charlotte Bronte', 'JANE EYRE', 300, 10, null);
+INSERT INTO public.livre (id, auteur, titre, nombredepages, nombreexemplaire, categorie) VALUES (32, 'Virginia Woolf', 'MRS DALLOWAY', 300, 10, null);

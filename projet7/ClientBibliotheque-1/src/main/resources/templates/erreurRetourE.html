@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Erreur</title>
+<link rel="stylesheet" type="text/css" href="style5.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="script.js"></script>
+<link href='https://fonts.googleapis.com/css?family=Limelight'
+	rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Lobster'
+	rel='stylesheet' type='text/css'>
+</head>
+<body>
+	<h1>Attention !!!!!</h1>
+
+	<h3>
+		Aucun pret ne correspond à cet email <br> Veuillez entrez un autre identifiant
+		<p>
+			<a th:href="@{/PretEmployee}"> Retour</a>
+		</p>
+	</h3>
+</body>
+</html>
