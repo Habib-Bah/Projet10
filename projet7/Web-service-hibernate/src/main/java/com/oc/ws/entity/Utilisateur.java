@@ -22,17 +22,21 @@ public class Utilisateur {
     private String email;
     @Column
     private String role;
+    @Column
+    private String code;
+    
     public Utilisateur() {
         super();
         // TODO Auto-generated constructor stub
     }
-    public Utilisateur(String nom, String prenom, String motdepasse, String email) {
+    public Utilisateur(String nom, String prenom, String motdepasse, String email, String code) {
         super();
         this.nom = nom;
         this.Prenom = prenom;
         this.motdepasse = motdepasse;
         this.email = email;
         this.role = "user";
+        this.code = code;
     }
 
     public long getId() {
@@ -72,6 +76,12 @@ public class Utilisateur {
     public void setRole(String role) {
         this.role = role;
     }
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
 
 
 }

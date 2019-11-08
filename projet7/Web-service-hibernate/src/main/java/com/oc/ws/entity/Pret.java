@@ -24,6 +24,8 @@ public class Pret {
     private String titrelivre;
     @Column
     private String email;
+    @Column
+    private String code;
 
     public Pret() {
         super();
@@ -31,7 +33,7 @@ public class Pret {
     }
 
     public Pret(String nomUtilisateur, String prenom, String titrelivre, String dateDeDebutDePret,
-                String dateDeFinDePret, String email) {
+                String dateDeFinDePret, String email, String code) {
         super();
         this.datedebut = dateDeDebutDePret;
         this.prenom = prenom;
@@ -39,6 +41,7 @@ public class Pret {
         nomutilisateur = nomUtilisateur;
         this.titrelivre = titrelivre;
         this.email = email;
+        this.code = code;
     }
 
     public long getId() {
@@ -97,4 +100,12 @@ public class Pret {
         this.email = email;
     }
 
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+    
 }

@@ -20,6 +20,8 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="prenom" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="email" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="motdepasse" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="role" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="code" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -33,7 +35,9 @@ import javax.xml.bind.annotation.XmlType;
     "nom",
     "prenom",
     "email",
-    "motdepasse"
+    "motdepasse",
+    "role",
+    "code"
 })
 public class Inscription {
 
@@ -41,6 +45,8 @@ public class Inscription {
     protected String prenom;
     protected String email;
     protected String motdepasse;
+    protected String role;
+    protected String code;
 
     /**
      * Obtient la valeur de la propriété nom.
@@ -136,6 +142,54 @@ public class Inscription {
      */
     public void setMotdepasse(String value) {
         this.motdepasse = value;
+    }
+
+    /**
+     * Obtient la valeur de la propriété role.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getRole() {
+        return role;
+    }
+
+    /**
+     * Définit la valeur de la propriété role.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setRole(String value) {
+        this.role = value;
+    }
+
+    /**
+     * Obtient la valeur de la propriété code.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getCode() {
+        return code;
+    }
+
+    /**
+     * Définit la valeur de la propriété code.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCode(String value) {
+        this.code = value;
     }
 
 }

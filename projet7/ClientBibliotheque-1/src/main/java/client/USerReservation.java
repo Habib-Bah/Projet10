@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="email" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="code" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,34 +27,34 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "USerReservation", propOrder = {
-    "email"
+    "code"
 })
 public class USerReservation {
 
-    protected String email;
+    protected String code;
 
     /**
-     * Obtient la valeur de la propriété email.
+     * Obtient la valeur de la propriété code.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getEmail() {
-        return email;
+    public String getCode() {
+        return code;
     }
 
     /**
-     * Définit la valeur de la propriété email.
+     * Définit la valeur de la propriété code.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setEmail(String value) {
-        this.email = value;
+    public void setCode(String value) {
+        this.code = value;
     }
 
 }

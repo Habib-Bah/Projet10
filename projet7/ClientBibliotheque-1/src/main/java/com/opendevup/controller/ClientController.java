@@ -39,8 +39,24 @@ public class ClientController {
 
 		BibliothequeService livreS = new BibliothequeService();
 		BibliotequeVilleWS bib = livreS.getBibliotequeVilleWSPort();
+		
+		List<Utilisateur> listeU= bib.listUser();
+		
+		for(Utilisateur ut : listeU) {
+			
+			if(ut.getCode().equals(u.getCode())) {
+				return "mauvaisCode";
+			}
+			if(ut.getEmail().equals(u.getEmail())) {
+				return "mauvaisE";
+			
+		}
+			
+	 }
+		
+		
 
-		bib.inscription(u.getUserName(), u.getPrenom(), u.getEmail(), u.getEncrytedPassword());
+		bib.inscription(u.getUserName(), u.getPrenom(), u.getEmail(), u.getEncrytedPassword(), "user", u.getCode());
 
 		return "resultatInscription";
 	}
@@ -131,7 +147,7 @@ public class ClientController {
 		java.util.List<Pret>  prets = new ArrayList<>();
 		
 		for(Pret p : pret) {
-			if(p.getEmail().equalsIgnoreCase(r.getEmail())) {
+			if(p.getCode().equalsIgnoreCase(r.getCode())) {
 				Pret pr = new Pret();
 				pr.setNomutilisateur(p.getNomutilisateur());
 				pr.setPrenom(r.getPrenom());
@@ -139,6 +155,7 @@ public class ClientController {
 				pr.setTitrelivre(p.getTitrelivre());
 				pr.setDatedebut(pr.getDatedebut());
 				pr.setDatefin(p.getDatefin());
+				pr.setCode(p.getCode());
 				prets.add(pr);
 				
 				
@@ -149,8 +166,6 @@ public class ClientController {
 		
 		return "resultReservation";
 		
-		
-
 		
 	}
 	
@@ -278,7 +293,7 @@ public class ClientController {
 		
 		for(Utilisateur u : users) {
 			
-			if(u.getEmail().equalsIgnoreCase(r.getEmail())) {
+			if(u.getEmail().equalsIgnoreCase(r.getEmail()) && u.getCode().equals(r.getCode())) {
 				String pattern = "dd/MM/yyyy";
 				DateFormat df = new SimpleDateFormat(pattern);
 				Date today = Calendar.getInstance().getTime();
@@ -286,7 +301,7 @@ public class ClientController {
 				today.setMonth(today.getMonth() + 1);
 				String datefin = df.format(today);
 				
-				bib.reservation(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(), datedebut , datefin, r.getEmail());
+				bib.reservation(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(), datedebut , datefin, r.getEmail(), r.getCode());
 				return "ConfReser";
 			}
 		}
@@ -330,7 +345,7 @@ public class ClientController {
 			if(p.getEmail().equalsIgnoreCase(r.getEmail()) && p.getTitrelivre().equalsIgnoreCase(r.getTitrelivre())) {
 				
 				bib.retour(r.getEmail(), r.getTitrelivre());
-				bib.reservation(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(), datedebut, datefin, r.getEmail());
+				bib.reservation(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(), datedebut, datefin, r.getEmail(), r.getCode());
 				return "confirmationP";
 			}
 		}

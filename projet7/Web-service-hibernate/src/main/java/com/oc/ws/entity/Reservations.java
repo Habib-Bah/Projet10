@@ -1,12 +1,15 @@
 package com.oc.ws.entity;
 
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
-@XmlRootElement(name="reservation")
-public class Reservation {
+@XmlRootElement(name="reservationE")
+public class Reservations {
     private static final long serialVersionUID = 1L;
 
 
@@ -28,15 +31,17 @@ public class Reservation {
     private String email;
     @Column
     private String code;
+    @Column
+    private int numero;
 
 
-    public Reservation() {
+    public Reservations() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-    public Reservation(String nomUtilisateur, String prenom, String titrelivre, String dateDeDebutDePret,
-                       String dateDeFinDePret, String email, String code) {
+    public Reservations(String nomUtilisateur, String prenom, String titrelivre, String dateDeDebutDePret,
+                       String dateDeFinDePret, String email) {
         super();
         this.datedebut = dateDeDebutDePret;
         this.prenom = prenom;
@@ -44,7 +49,6 @@ public class Reservation {
         nomutilisateur = nomUtilisateur;
         this.titrelivre = titrelivre;
         this.email = email;
-        this.code = code;
     }
 
     public long getId() {
@@ -111,4 +115,13 @@ public class Reservation {
 		this.code = code;
 	}
 
+	public  int getNumero() {
+		return numero;
+	}
+
+	public  void setNumero(int numero) {
+		this.numero = numero;
+	}
+    
+    
 }

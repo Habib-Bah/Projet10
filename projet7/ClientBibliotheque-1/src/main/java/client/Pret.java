@@ -16,6 +16,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
+ *         &lt;element name="code" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="datedebut" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="datefin" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="email" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
@@ -32,6 +33,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "pret", propOrder = {
+    "code",
     "datedebut",
     "datefin",
     "email",
@@ -41,12 +43,37 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class Pret {
 
+    protected String code;
     protected String datedebut;
     protected String datefin;
     protected String email;
     protected String nomutilisateur;
     protected String prenom;
     protected String titrelivre;
+
+    /**
+     * Obtient la valeur de la propriété code.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getCode() {
+        return code;
+    }
+
+    /**
+     * Définit la valeur de la propriété code.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCode(String value) {
+        this.code = value;
+    }
 
     /**
      * Obtient la valeur de la propriété datedebut.

@@ -29,6 +29,7 @@ public class ObjectFactory {
     private final static QName _ProlongerpretResponse_QNAME = new QName("http://wsService.ws.oc.com/", "prolongerpretResponse");
     private final static QName _InscriptionResponse_QNAME = new QName("http://wsService.ws.oc.com/", "inscriptionResponse");
     private final static QName _Retour_QNAME = new QName("http://wsService.ws.oc.com/", "Retour");
+    private final static QName _ListAttente_QNAME = new QName("http://wsService.ws.oc.com/", "ListAttente");
     private final static QName _Inscription_QNAME = new QName("http://wsService.ws.oc.com/", "inscription");
     private final static QName _Reservation_QNAME = new QName("http://wsService.ws.oc.com/", "reservation");
     private final static QName _ListPretResponse_QNAME = new QName("http://wsService.ws.oc.com/", "ListPretResponse");
@@ -40,12 +41,15 @@ public class ObjectFactory {
     private final static QName _USerReservationResponse_QNAME = new QName("http://wsService.ws.oc.com/", "USerReservationResponse");
     private final static QName _Connexion_QNAME = new QName("http://wsService.ws.oc.com/", "connexion");
     private final static QName _Listedeslivres_QNAME = new QName("http://wsService.ws.oc.com/", "Listedeslivres");
+    private final static QName _Reservations_QNAME = new QName("http://wsService.ws.oc.com/", "reservations");
     private final static QName _ConnexionEquipeResponse_QNAME = new QName("http://wsService.ws.oc.com/", "connexionEquipeResponse");
     private final static QName _Prolongerpret_QNAME = new QName("http://wsService.ws.oc.com/", "prolongerpret");
     private final static QName _TrouverlivreResponse_QNAME = new QName("http://wsService.ws.oc.com/", "trouverlivreResponse");
     private final static QName _ConnexionResponse_QNAME = new QName("http://wsService.ws.oc.com/", "connexionResponse");
+    private final static QName _ReservationsResponse_QNAME = new QName("http://wsService.ws.oc.com/", "reservationsResponse");
     private final static QName _ListedeslivresResponse_QNAME = new QName("http://wsService.ws.oc.com/", "ListedeslivresResponse");
     private final static QName _ListUser_QNAME = new QName("http://wsService.ws.oc.com/", "listUser");
+    private final static QName _ListAttenteResponse_QNAME = new QName("http://wsService.ws.oc.com/", "ListAttenteResponse");
     private final static QName _Trouverlivre_QNAME = new QName("http://wsService.ws.oc.com/", "trouverlivre");
     private final static QName _ListUserResponse_QNAME = new QName("http://wsService.ws.oc.com/", "listUserResponse");
     private final static QName _Livre_QNAME = new QName("http://wsService.ws.oc.com/", "livre");
@@ -155,6 +159,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ListAttente }
+     * 
+     */
+    public ListAttente createListAttente() {
+        return new ListAttente();
+    }
+
+    /**
      * Create an instance of {@link Inscription }
      * 
      */
@@ -176,6 +188,14 @@ public class ObjectFactory {
      */
     public InscriptionResponse createInscriptionResponse() {
         return new InscriptionResponse();
+    }
+
+    /**
+     * Create an instance of {@link ListAttenteResponse }
+     * 
+     */
+    public ListAttenteResponse createListAttenteResponse() {
+        return new ListAttenteResponse();
     }
 
     /**
@@ -235,11 +255,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ReservationsResponse }
+     * 
+     */
+    public ReservationsResponse createReservationsResponse() {
+        return new ReservationsResponse();
+    }
+
+    /**
      * Create an instance of {@link Listedeslivres }
      * 
      */
     public Listedeslivres createListedeslivres() {
         return new Listedeslivres();
+    }
+
+    /**
+     * Create an instance of {@link Reservations }
+     * 
+     */
+    public Reservations createReservations() {
+        return new Reservations();
     }
 
     /**
@@ -309,6 +345,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://wsService.ws.oc.com/", name = "Retour")
     public JAXBElement<Retour> createRetour(Retour value) {
         return new JAXBElement<Retour>(_Retour_QNAME, Retour.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ListAttente }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://wsService.ws.oc.com/", name = "ListAttente")
+    public JAXBElement<ListAttente> createListAttente(ListAttente value) {
+        return new JAXBElement<ListAttente>(_ListAttente_QNAME, ListAttente.class, null, value);
     }
 
     /**
@@ -411,6 +456,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Reservations }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://wsService.ws.oc.com/", name = "reservations")
+    public JAXBElement<Reservations> createReservations(Reservations value) {
+        return new JAXBElement<Reservations>(_Reservations_QNAME, Reservations.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link ConnexionEquipeResponse }{@code >}}
      * 
      */
@@ -447,6 +501,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ReservationsResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://wsService.ws.oc.com/", name = "reservationsResponse")
+    public JAXBElement<ReservationsResponse> createReservationsResponse(ReservationsResponse value) {
+        return new JAXBElement<ReservationsResponse>(_ReservationsResponse_QNAME, ReservationsResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link ListedeslivresResponse }{@code >}}
      * 
      */
@@ -462,6 +525,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://wsService.ws.oc.com/", name = "listUser")
     public JAXBElement<ListUser> createListUser(ListUser value) {
         return new JAXBElement<ListUser>(_ListUser_QNAME, ListUser.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ListAttenteResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://wsService.ws.oc.com/", name = "ListAttenteResponse")
+    public JAXBElement<ListAttenteResponse> createListAttenteResponse(ListAttenteResponse value) {
+        return new JAXBElement<ListAttenteResponse>(_ListAttenteResponse_QNAME, ListAttenteResponse.class, null, value);
     }
 
     /**

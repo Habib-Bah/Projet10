@@ -3,26 +3,28 @@ package client;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Classe Java pour prolongerpret complex type.
+ * <p>Classe Java pour reservations complex type.
  * 
  * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.
  * 
  * <pre>
- * &lt;complexType name="prolongerpret">
+ * &lt;complexType name="reservations">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="nom" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="Nomutilisateur" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="prenom" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="titrelivre" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="datedebut" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="datefin" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="email" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="code" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="numero" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -32,47 +34,50 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "prolongerpret", propOrder = {
-    "nom",
+@XmlType(name = "reservations", propOrder = {
+    "nomutilisateur",
     "prenom",
     "titrelivre",
     "datedebut",
     "datefin",
     "email",
-    "code"
+    "code",
+    "numero"
 })
-public class Prolongerpret {
+public class Reservations {
 
-    protected String nom;
+    @XmlElement(name = "Nomutilisateur")
+    protected String nomutilisateur;
     protected String prenom;
     protected String titrelivre;
     protected String datedebut;
     protected String datefin;
     protected String email;
     protected String code;
+    protected String numero;
 
     /**
-     * Obtient la valeur de la propriété nom.
+     * Obtient la valeur de la propriété nomutilisateur.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getNom() {
-        return nom;
+    public String getNomutilisateur() {
+        return nomutilisateur;
     }
 
     /**
-     * Définit la valeur de la propriété nom.
+     * Définit la valeur de la propriété nomutilisateur.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setNom(String value) {
-        this.nom = value;
+    public void setNomutilisateur(String value) {
+        this.nomutilisateur = value;
     }
 
     /**
@@ -217,6 +222,30 @@ public class Prolongerpret {
      */
     public void setCode(String value) {
         this.code = value;
+    }
+
+    /**
+     * Obtient la valeur de la propriété numero.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getNumero() {
+        return numero;
+    }
+
+    /**
+     * Définit la valeur de la propriété numero.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setNumero(String value) {
+        this.numero = value;
     }
 
 }

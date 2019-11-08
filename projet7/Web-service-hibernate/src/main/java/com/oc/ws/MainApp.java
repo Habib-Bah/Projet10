@@ -1,6 +1,10 @@
 package com.oc.ws;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 import javax.xml.ws.Endpoint;
 
@@ -15,6 +19,11 @@ public class MainApp {
 		Endpoint.publish(url, new Bibliotheque());
 		System.out.println(url);
 
+		
+		Connection connection;
+		Statement statement;
+		ResultSet result;
+	
 	}
-
+	
 }

@@ -10,6 +10,7 @@ public class AppUser {
 		private String email;
 		private String role;	
 		private int enabled;
+		private String code;
 	 
 	    public AppUser() {
 	
@@ -17,7 +18,7 @@ public class AppUser {
 	        this.enabled = 1;
 	    }
 	 
-	    public AppUser(String userName, String prenom, String encrytedPassword, String email) {
+	    public AppUser(String userName, String prenom, String encrytedPassword, String email, String code) {
 	        
 	        this.userName = userName;
 	        this.encrytedPassword = encrytedPassword;
@@ -25,6 +26,7 @@ public class AppUser {
 	        this.email = email;
 	        this.role = "user";
 	        this.enabled = 1;
+	        this.code = code;
 	        
 	    }
 	 
@@ -86,6 +88,16 @@ public class AppUser {
 
 		public void setEmail(String email) {
 			this.email = email;
+		}
+		
+		
+
+		public String getCode() {
+			return code;
+		}
+
+		public void setCode(String code) {
+			this.code = code;
 		}
 
 		@Override

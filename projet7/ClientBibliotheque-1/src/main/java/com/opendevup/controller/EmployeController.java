@@ -153,7 +153,7 @@ public class EmployeController {
 		today.setMonth(today.getMonth() + 1);
 		String datefin = df.format(today);
 
-		bib.reservation(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(), datedebut, datefin, r.getEmail());
+		//bib.reservation(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(), datedebut, datefin, r.getEmail());
 
 		return "confirmRE";
 	}
@@ -191,7 +191,7 @@ public class EmployeController {
 			if(p.getEmail().equalsIgnoreCase(r.getEmail()) && p.getTitrelivre().equalsIgnoreCase(r.getTitrelivre())) {
 				
 				bib.retour(r.getEmail(), r.getTitrelivre());
-				bib.reservation(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(), datedebut, datefin, r.getEmail());
+				//bib.reservation(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(), datedebut, datefin, r.getEmail());
 				return "confirmationPE";
 			}
 		}

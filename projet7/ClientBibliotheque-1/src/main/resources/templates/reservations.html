@@ -10,7 +10,7 @@
      <div class="login-page">
 		<div class="form">
 			<form class="register-form" th:action="@{findReservation}" method="POST">
-				<input type="text" placeholder="Votre email" name="email" th:value="${reservation.email}"/>
+				<input type="text" placeholder="Votre code de reservation" name="code" th:value="${reservation.code}"/>
 				<button>Recherche</button>
 			</form>
 		</div>

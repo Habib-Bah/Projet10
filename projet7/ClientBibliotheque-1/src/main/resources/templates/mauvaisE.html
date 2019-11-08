@@ -12,17 +12,12 @@
 	rel='stylesheet' type='text/css'>
 </head>
 <body>
-	<h1>Attention !!!!!</h1>
-<body>
-	<h3>Ce email associé à ce code de reservation n'existe pas.</h3><br>
-	<h3>Veillez créer un compte avec cet email et choisir un code de reservation<br>
-	<p>
-			<a th:href="@{/Inscription}"> Ici</a>
-	</p>
-	</h3> 
-	 <br>
-	
-	<h3>Ou entrer un email et un code valide</h3>
-	<h3><a th:href="@{/reserver}"> ici</a> </h3>
+
+	<h3>
+		Cette adresse mail existe deja, veuillez vous connecter
+		<p>
+			<a th:href="@{/Connexion}"> Ici</a>
+		</p> 
+	</h3>
 </body>
 </html>

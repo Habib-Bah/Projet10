@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 @ComponentScans(value = { @ComponentScan("com.oc.ws.dao"),
-      @ComponentScan("com.oc.ws.service") })
+@ComponentScan("com.oc.ws.service") })
 public class AppConfig {
 
    @Bean
