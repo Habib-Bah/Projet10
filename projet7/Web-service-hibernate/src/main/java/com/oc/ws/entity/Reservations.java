@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
-@XmlRootElement(name="reservationE")
+@XmlRootElement(name="reservations")
 public class Reservations {
     private static final long serialVersionUID = 1L;
 

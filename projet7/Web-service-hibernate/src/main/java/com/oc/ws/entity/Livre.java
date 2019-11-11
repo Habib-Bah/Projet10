@@ -23,8 +23,8 @@ public class Livre {
     @Column(name="titre")
     private String titre;
 
-    @Column(name="nombredepage")
-    private int nombredepage;
+    @Column(name="nombredepages")
+    private int nombredepages;
 
     @Column(name="categorie")
     private String categorie;
@@ -56,12 +56,12 @@ public class Livre {
         this.titre = titre;
     }
 
-    public int getNombredepage() {
-        return nombredepage;
+    public int getNombredepages() {
+        return nombredepages;
     }
 
-    public void setNombredepage(int nombredepage) {
-        this.nombredepage = nombredepage;
+    public void setNombredepages(int nombredepages) {
+        this.nombredepages = nombredepages;
     }
 
     public String getCategorie() {

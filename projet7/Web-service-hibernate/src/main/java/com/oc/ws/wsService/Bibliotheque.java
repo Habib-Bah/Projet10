@@ -27,10 +27,10 @@ import com.oc.ws.service.UtilisateurService;
 @WebService(name = "BibliotequeVilleWS")
 public class Bibliotheque {
 
-	List<Livre> livres = new ArrayList<>();
+	
 	List<Utilisateur> utilisateurs = new ArrayList<>();
 	List<Reservation> listreservation = new ArrayList<>();
-	List<Reservations> listeattente = new ArrayList<>();
+	
 
 	Connection connection;
 	Statement statement;
@@ -140,12 +140,12 @@ public class Bibliotheque {
 	public List<Livre> getLivre() throws IOException {
 
 		Configuration conf = new Configuration();
+		List<Livre> livres = new ArrayList<>();
 
 		try {
 
 			Class.forName("org.postgresql.Driver").newInstance();
 			connection = DriverManager.getConnection(conf.getMotDepasse());
-			statement = connection.prepareStatement("select * from livre");
 
 			statement = connection.createStatement();
 			result = statement.executeQuery("select * from livre");
@@ -161,7 +161,7 @@ public class Bibliotheque {
 				Livre l = new Livre();
 				l.setAuteur(auteur);
 				l.setTitre(titre);
-				l.setNombredepage(nombredepages);
+				l.setNombredepages(nombredepages);
 				l.setNombreexemplaire(nombreexemplaire);
 				l.setCategorie(categorie);
 				livres.add(l);
@@ -315,7 +315,7 @@ public class Bibliotheque {
 				if (result.getString(3).equalsIgnoreCase(titrelivre)) {
 					l.setTitre(titrelivre);
 					l.setNombreexemplaire(result.getInt(5));
-					l.setNombredepage(result.getInt(4));
+					l.setNombredepages(result.getInt(4));
 					l.setAuteur(result.getString(2));
 				}
 			}
@@ -411,12 +411,11 @@ public class Bibliotheque {
 
 	}
 
-	@WebMethod(operationName = "reservations")
+	@WebMethod(operationName = "reserverEnAvance")
 	public void reserverEnAvance(@WebParam(name = "Nomutilisateur") String nomutilisateur,
 			@WebParam(name = "prenom") String prenom, @WebParam(name = "titrelivre") String titrelivre,
-			@WebParam(name = "datedebut") String datedebut, @WebParam(name = "datefin") String datefin,
 			@WebParam(name = "email") String email, @WebParam(name = "code") String code,
-			@WebParam(name = "numero") String numero) throws IOException {
+			@WebParam(name = "numero") int numero) throws IOException {
 
 		Configuration conf = new Configuration();
 
@@ -425,20 +424,21 @@ public class Bibliotheque {
 			Class.forName("org.postgresql.Driver").newInstance();
 			connection = DriverManager.getConnection(conf.getMotDepasse());
 			statement = connection.createStatement();
-			String sql = "insert into reservations (nomutilisateur, prenom, titrelivre, datedebut, datefin, code, email, numero) values ( '"
-					+ nomutilisateur + "', '" + prenom + "' ,'" + titrelivre + "', '" + datedebut + "', '" + datefin
-					+ "', '" + code + "', '" + email + "', '" + code + "', '" + numero + "')";
+			String sql = "insert into reservations (nomutilisateur, prenom, titrelivre, code, email, numero) values ( '"
+					+ nomutilisateur + "', '" + prenom + "' ,'" + titrelivre + "', '" + code + "', '" + email + "', '" + numero + "')";
 			statement.executeQuery(sql);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+	
 
 	@WebMethod(operationName = "ListAttente")
-	public List ListAttente() throws IOException {
-		List<Reservations> attente = new ArrayList();
+	public List<Reservations> ListAttente() throws IOException {
+		
 		Configuration conf = new Configuration();
+		List<Reservations> attente = new ArrayList();
 
 		try {
 
@@ -451,14 +451,12 @@ public class Bibliotheque {
 
 			while (result.next()) {
 				Reservations r = new Reservations();
-				r.setNomutilisateur(result.getString(2));
-				r.setPrenom(result.getString(3));
-				r.setTitrelivre(result.getString(4));
-				r.setDatedebut(result.getString(5));
-				r.setDatefin(result.getString(6));
-				r.setEmail(result.getString(7));
-				r.setCode(result.getString(8));
-				r.setNumero(result.getInt(9));
+				r.setNomutilisateur(result.getString(1));
+				r.setPrenom(result.getString(2));
+				r.setTitrelivre(result.getString(3));
+				r.setCode(result.getString(4));
+				r.setEmail(result.getString(5));
+				r.setNumero(result.getInt(6));
 
 				attente.add(r);
 			}
@@ -467,6 +465,57 @@ public class Bibliotheque {
 			e.printStackTrace();
 		}
 		return attente;
+	}
+
+	@WebMethod(operationName = "ajouterLivre")
+	public void ajouterLivre(@WebParam(name = "titre") String titre,
+			@WebParam(name = "nombredepages") int nombredepages, @WebParam(name = "categorie") String categorie,
+			@WebParam(name = "auteur") String auteur, @WebParam(name = "nombreexemplaire") int nombreexemplaire) throws IOException {
+		
+		Configuration conf = new Configuration();
+
+		try {
+
+			Class.forName("org.postgresql.Driver").newInstance();
+			connection = DriverManager.getConnection(conf.getMotDepasse());
+
+			statement = connection.createStatement();
+			String sql = "insert into livre (auteur, titre, nombredepages, nombreexemplaire, categorie) values ( '"
+					+ auteur + "', '" + titre + "' ,'" + nombredepages + "', '" + nombreexemplaire + "', '" + categorie + "')";
+			result = statement.executeQuery(sql);
+
+			while (result.next()) {
+				Livre l = new Livre();
+				l.setAuteur(result.getString(2));
+				l.setTitre(result.getString(3));
+				l.setNombredepages(result.getInt(4));
+				l.setNombreexemplaire(result.getInt(5));
+				l.setCategorie(result.getString(6));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	
+	@WebMethod(operationName = "supprimerLivre")
+	public void supprimerLivre(@WebParam(name = "titre") String titre) throws IOException {
+
+		Configuration conf = new Configuration();
+		try {
+
+			Class.forName("org.postgresql.Driver").newInstance();
+			connection = DriverManager.getConnection(conf.getMotDepasse());
+
+			statement = connection.createStatement();
+
+			String sql = "delete from livre where titre like '" + titre + "'";
+			statement.executeQuery(sql);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

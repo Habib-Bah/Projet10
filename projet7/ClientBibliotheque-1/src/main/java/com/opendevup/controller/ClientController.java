@@ -20,6 +20,7 @@ import client.IOException_Exception;
 import client.Livre;
 import client.Pret;
 import client.Reservation;
+import client.Reservations;
 import client.Retour;
 import client.Utilisateur;
 
@@ -273,9 +274,10 @@ public class ClientController {
 		
 		
 		
-		List <Pret> prets = new ArrayList();
-		List <Utilisateur> users = new ArrayList();
-		List <Livre> livre = new ArrayList();
+		List <Pret> prets = new ArrayList<>();
+		List <Utilisateur> users = new ArrayList<>();
+		List <Livre> listeL = new ArrayList<>();
+		List<Reservations> listeAtt= new ArrayList<>();
 		
 		prets = bib.listPret();
 		users = bib.listUser();
@@ -293,6 +295,8 @@ public class ClientController {
 		
 		for(Utilisateur u : users) {
 			
+			
+			
 			if(u.getEmail().equalsIgnoreCase(r.getEmail()) && u.getCode().equals(r.getCode())) {
 				String pattern = "dd/MM/yyyy";
 				DateFormat df = new SimpleDateFormat(pattern);
@@ -300,9 +304,47 @@ public class ClientController {
 				String datedebut = df.format(today);
 				today.setMonth(today.getMonth() + 1);
 				String datefin = df.format(today);
+				listeL = bib.listedeslivres();
+				listeAtt = bib.listAttente();
 				
-				bib.reservation(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(), datedebut , datefin, r.getEmail(), r.getCode());
-				return "ConfReser";
+				for(Livre l : listeL) {
+					
+					if(l.getTitre().equalsIgnoreCase(r.getTitrelivre())) {
+						if(l.getNombreexemplaire() == 0) {
+							
+						
+							if(listeAtt.isEmpty()) {
+								bib.reserverEnAvance(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(), r.getEmail(), r.getCode(), 1);
+								
+							}
+							else {
+								Reservations res = (Reservations) listeAtt.get(listeAtt.size() - 1);
+								bib.reserverEnAvance(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(), r.getEmail(), r.getCode(), res.getNumero() + 1);
+							}
+							
+							
+							return "pasdexemplaire";
+						}
+						
+						else {
+							Livre livre = new Livre();
+							livre.setAuteur(l.getAuteur());
+							livre.setCategorie(l.getCategorie());
+							livre.setTitre(l.getTitre());
+							livre.setNombredepages(l.getNombredepages());
+							livre.setNombreexemplaire(l.getNombreexemplaire() - 1);
+							
+							bib.supprimerLivre(r.getTitrelivre());
+							bib.ajouterLivre(livre.getTitre(), livre.getNombredepages(), livre.getCategorie(), livre.getAuteur(), l.getNombreexemplaire() - 1);
+							bib.reservation(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(), datedebut , datefin, r.getEmail(), r.getCode());
+							listeL = bib.listedeslivres();
+							return "ConfReser";
+
+						}
+					}
+					
+				}	
+				
 			}
 		}
 		

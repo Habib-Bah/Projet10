@@ -290,43 +290,37 @@ public interface BibliotequeVilleWS {
      * @param nomutilisateur
      * @param code
      * @param numero
-     * @param datedebut
-     * @param datefin
      * @param prenom
      * @param titrelivre
      * @param email
      * @throws IOException_Exception
      */
     @WebMethod
-    @RequestWrapper(localName = "reservations", targetNamespace = "http://wsService.ws.oc.com/", className = "client.Reservations")
-    @ResponseWrapper(localName = "reservationsResponse", targetNamespace = "http://wsService.ws.oc.com/", className = "client.ReservationsResponse")
-    @Action(input = "http://wsService.ws.oc.com/BibliotequeVilleWS/reservationsRequest", output = "http://wsService.ws.oc.com/BibliotequeVilleWS/reservationsResponse", fault = {
-        @FaultAction(className = IOException_Exception.class, value = "http://wsService.ws.oc.com/BibliotequeVilleWS/reservations/Fault/IOException")
+    @RequestWrapper(localName = "reserverEnAvance", targetNamespace = "http://wsService.ws.oc.com/", className = "client.ReserverEnAvance")
+    @ResponseWrapper(localName = "reserverEnAvanceResponse", targetNamespace = "http://wsService.ws.oc.com/", className = "client.ReserverEnAvanceResponse")
+    @Action(input = "http://wsService.ws.oc.com/BibliotequeVilleWS/reserverEnAvanceRequest", output = "http://wsService.ws.oc.com/BibliotequeVilleWS/reserverEnAvanceResponse", fault = {
+        @FaultAction(className = IOException_Exception.class, value = "http://wsService.ws.oc.com/BibliotequeVilleWS/reserverEnAvance/Fault/IOException")
     })
-    public void reservations(
+    public void reserverEnAvance(
         @WebParam(name = "Nomutilisateur", targetNamespace = "")
         String nomutilisateur,
         @WebParam(name = "prenom", targetNamespace = "")
         String prenom,
         @WebParam(name = "titrelivre", targetNamespace = "")
         String titrelivre,
-        @WebParam(name = "datedebut", targetNamespace = "")
-        String datedebut,
-        @WebParam(name = "datefin", targetNamespace = "")
-        String datefin,
         @WebParam(name = "email", targetNamespace = "")
         String email,
         @WebParam(name = "code", targetNamespace = "")
         String code,
         @WebParam(name = "numero", targetNamespace = "")
-        String numero)
+        int numero)
         throws IOException_Exception
     ;
 
     /**
      * 
      * @return
-     *     returns java.util.List<java.lang.Object>
+     *     returns java.util.List<client.Reservations>
      * @throws IOException_Exception
      */
     @WebMethod(operationName = "ListAttente")
@@ -336,7 +330,53 @@ public interface BibliotequeVilleWS {
     @Action(input = "http://wsService.ws.oc.com/BibliotequeVilleWS/ListAttenteRequest", output = "http://wsService.ws.oc.com/BibliotequeVilleWS/ListAttenteResponse", fault = {
         @FaultAction(className = IOException_Exception.class, value = "http://wsService.ws.oc.com/BibliotequeVilleWS/ListAttente/Fault/IOException")
     })
-    public List<Object> listAttente()
+    public List<Reservations> listAttente()
+        throws IOException_Exception
+    ;
+
+    /**
+     * 
+     * @param categorie
+     * @param titre
+     * @param nombredepages
+     * @param nombreexemplaire
+     * @param auteur
+     * @throws IOException_Exception
+     */
+    @WebMethod
+    @RequestWrapper(localName = "ajouterLivre", targetNamespace = "http://wsService.ws.oc.com/", className = "client.AjouterLivre")
+    @ResponseWrapper(localName = "ajouterLivreResponse", targetNamespace = "http://wsService.ws.oc.com/", className = "client.AjouterLivreResponse")
+    @Action(input = "http://wsService.ws.oc.com/BibliotequeVilleWS/ajouterLivreRequest", output = "http://wsService.ws.oc.com/BibliotequeVilleWS/ajouterLivreResponse", fault = {
+        @FaultAction(className = IOException_Exception.class, value = "http://wsService.ws.oc.com/BibliotequeVilleWS/ajouterLivre/Fault/IOException")
+    })
+    public void ajouterLivre(
+        @WebParam(name = "titre", targetNamespace = "")
+        String titre,
+        @WebParam(name = "nombredepages", targetNamespace = "")
+        int nombredepages,
+        @WebParam(name = "categorie", targetNamespace = "")
+        String categorie,
+        @WebParam(name = "auteur", targetNamespace = "")
+        String auteur,
+        @WebParam(name = "nombreexemplaire", targetNamespace = "")
+        int nombreexemplaire)
+        throws IOException_Exception
+    ;
+
+    /**
+     * 
+     * @param titre
+     * @throws IOException_Exception
+     */
+    @WebMethod
+    @RequestWrapper(localName = "supprimerLivre", targetNamespace = "http://wsService.ws.oc.com/", className = "client.SupprimerLivre")
+    @ResponseWrapper(localName = "supprimerLivreResponse", targetNamespace = "http://wsService.ws.oc.com/", className = "client.SupprimerLivreResponse")
+    @Action(input = "http://wsService.ws.oc.com/BibliotequeVilleWS/supprimerLivreRequest", output = "http://wsService.ws.oc.com/BibliotequeVilleWS/supprimerLivreResponse", fault = {
+        @FaultAction(className = IOException_Exception.class, value = "http://wsService.ws.oc.com/BibliotequeVilleWS/supprimerLivre/Fault/IOException")
+    })
+    public void supprimerLivre(
+        @WebParam(name = "titre", targetNamespace = "")
+        String titre)
         throws IOException_Exception
     ;
 

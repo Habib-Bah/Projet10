@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,7 @@ import com.opendevup.model.AppUser;
 import client.BibliotequeVilleWS;
 import client.BibliothequeService;
 import client.IOException_Exception;
+import client.Livre;
 import client.Pret;
 import client.Reservation;
 import client.Retour;
@@ -145,6 +147,7 @@ public class EmployeController {
 
 		BibliothequeService livreS = new BibliothequeService();
 		BibliotequeVilleWS bib = livreS.getBibliotequeVilleWSPort();
+		List<Livre> listeL = bib.listedeslivres();
 
 		String pattern = "dd/MM/yyyy";
 		DateFormat df = new SimpleDateFormat(pattern);
@@ -153,8 +156,26 @@ public class EmployeController {
 		today.setMonth(today.getMonth() + 1);
 		String datefin = df.format(today);
 
-		//bib.reservation(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(), datedebut, datefin, r.getEmail());
+		for(Livre l : listeL) {
+			if(l.getNombreexemplaire() == 0) {
+				return "pasdexemplaire";
+			}
+			
+			else {
+				Livre livre = new Livre();
+				livre.setAuteur(l.getAuteur());
+				livre.setCategorie(l.getCategorie());
+				livre.setTitre(l.getTitre());
+				livre.setNombredepages(l.getNombredepages());
+				livre.setNombreexemplaire(l.getNombreexemplaire() - 1);
+				
+				//bib.ajouterLivre
+				//bib.supprimerLivre
+				//bib.reservation(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(), datedebut, datefin, r.getEmail(), r.getCode());
 
+			}
+		}
+			
 		return "confirmRE";
 	}
 
