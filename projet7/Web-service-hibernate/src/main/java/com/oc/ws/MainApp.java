@@ -5,7 +5,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.xml.ws.Endpoint;
@@ -22,17 +26,17 @@ public class MainApp {
 		Endpoint.publish(url, new Bibliotheque());
 		System.out.println(url);
 
-		/*
 		
+	/*	
 		Connection connection;
 		Statement statement;
 		ResultSet result;
 		
 		
-		String auteur = "Roberta";
-		String titre = "Les passions de papa";
+		String auteur = "Robert Warrent";
+		String titre = "Les fous du roi";
 		int nombredepages = 250;
-		int nombreexemplaire = 1;
+		int nombreexemplaire = 15;
 		String categorie = "Roman";
 		
 		
@@ -58,8 +62,8 @@ public class MainApp {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		*/
 		
+		*/
 	}
 
 }

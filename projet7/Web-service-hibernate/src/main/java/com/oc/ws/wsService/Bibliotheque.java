@@ -174,7 +174,7 @@ public class Bibliotheque {
 		return livres;
 	}
 
-	@WebMethod(operationName = "reservation")
+	@WebMethod(operationName = "reserver")
 	public void pret(@WebParam(name = "Nomutilisateur") String nomutilisateur, @WebParam(name = "prenom") String prenom,
 			@WebParam(name = "titrelivre") String titrelivre, @WebParam(name = "datedebut") String datedebut,
 			@WebParam(name = "datefin") String datefin, @WebParam(name = "email") String email, @WebParam(name = "code") String code) throws IOException {
@@ -358,8 +358,8 @@ public class Bibliotheque {
 	}
 
 	@WebMethod(operationName = "ListPret")
-	public List<Pret> ListPret() throws IOException {
-		List<Pret> prets = new ArrayList();
+	public List<Reservation> ListPret() throws IOException {
+		List<Reservation> prets = new ArrayList();
 		Configuration conf = new Configuration();
 
 		try {
@@ -372,7 +372,7 @@ public class Bibliotheque {
 			result = statement.executeQuery(sql);
 
 			while (result.next()) {
-				Pret p = new Pret();
+				Reservation p = new Reservation();
 				p.setNomutilisateur(result.getString(2));
 				p.setPrenom(result.getString(3));
 				p.setTitrelivre(result.getString(4));

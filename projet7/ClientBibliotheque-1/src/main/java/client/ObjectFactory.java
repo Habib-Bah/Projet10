@@ -26,7 +26,6 @@ public class ObjectFactory {
 
     private final static QName _SupprimerLivreResponse_QNAME = new QName("http://wsService.ws.oc.com/", "supprimerLivreResponse");
     private final static QName _Utilisateur_QNAME = new QName("http://wsService.ws.oc.com/", "utilisateur");
-    private final static QName _ReservationResponse_QNAME = new QName("http://wsService.ws.oc.com/", "reservationResponse");
     private final static QName _ReserverEnAvanceResponse_QNAME = new QName("http://wsService.ws.oc.com/", "reserverEnAvanceResponse");
     private final static QName _ProlongerpretResponse_QNAME = new QName("http://wsService.ws.oc.com/", "prolongerpretResponse");
     private final static QName _AjouterLivre_QNAME = new QName("http://wsService.ws.oc.com/", "ajouterLivre");
@@ -36,7 +35,6 @@ public class ObjectFactory {
     private final static QName _Inscription_QNAME = new QName("http://wsService.ws.oc.com/", "inscription");
     private final static QName _Reservation_QNAME = new QName("http://wsService.ws.oc.com/", "reservation");
     private final static QName _ListPretResponse_QNAME = new QName("http://wsService.ws.oc.com/", "ListPretResponse");
-    private final static QName _Pret_QNAME = new QName("http://wsService.ws.oc.com/", "pret");
     private final static QName _SupprimerLivre_QNAME = new QName("http://wsService.ws.oc.com/", "supprimerLivre");
     private final static QName _ListPret_QNAME = new QName("http://wsService.ws.oc.com/", "ListPret");
     private final static QName _ConnexionEquipe_QNAME = new QName("http://wsService.ws.oc.com/", "connexionEquipe");
@@ -46,6 +44,7 @@ public class ObjectFactory {
     private final static QName _Connexion_QNAME = new QName("http://wsService.ws.oc.com/", "connexion");
     private final static QName _Listedeslivres_QNAME = new QName("http://wsService.ws.oc.com/", "Listedeslivres");
     private final static QName _Reservations_QNAME = new QName("http://wsService.ws.oc.com/", "reservations");
+    private final static QName _ReserverResponse_QNAME = new QName("http://wsService.ws.oc.com/", "reserverResponse");
     private final static QName _ConnexionEquipeResponse_QNAME = new QName("http://wsService.ws.oc.com/", "connexionEquipeResponse");
     private final static QName _Prolongerpret_QNAME = new QName("http://wsService.ws.oc.com/", "prolongerpret");
     private final static QName _TrouverlivreResponse_QNAME = new QName("http://wsService.ws.oc.com/", "trouverlivreResponse");
@@ -58,6 +57,7 @@ public class ObjectFactory {
     private final static QName _ListUserResponse_QNAME = new QName("http://wsService.ws.oc.com/", "listUserResponse");
     private final static QName _Livre_QNAME = new QName("http://wsService.ws.oc.com/", "livre");
     private final static QName _IOException_QNAME = new QName("http://wsService.ws.oc.com/", "IOException");
+    private final static QName _Reserver_QNAME = new QName("http://wsService.ws.oc.com/", "reserver");
     private final static QName _ReserverEnAvance_QNAME = new QName("http://wsService.ws.oc.com/", "reserverEnAvance");
 
     /**
@@ -89,14 +89,6 @@ public class ObjectFactory {
      */
     public ListPretResponse createListPretResponse() {
         return new ListPretResponse();
-    }
-
-    /**
-     * Create an instance of {@link Pret }
-     * 
-     */
-    public Pret createPret() {
-        return new Pret();
     }
 
     /**
@@ -137,14 +129,6 @@ public class ObjectFactory {
      */
     public USerReservationResponse createUSerReservationResponse() {
         return new USerReservationResponse();
-    }
-
-    /**
-     * Create an instance of {@link ReservationResponse }
-     * 
-     */
-    public ReservationResponse createReservationResponse() {
-        return new ReservationResponse();
     }
 
     /**
@@ -244,6 +228,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Reserver }
+     * 
+     */
+    public Reserver createReserver() {
+        return new Reserver();
+    }
+
+    /**
      * Create an instance of {@link ReserverEnAvance }
      * 
      */
@@ -316,6 +308,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ReserverResponse }
+     * 
+     */
+    public ReserverResponse createReserverResponse() {
+        return new ReserverResponse();
+    }
+
+    /**
      * Create an instance of {@link ConnexionEquipeResponse }
      * 
      */
@@ -363,15 +363,6 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://wsService.ws.oc.com/", name = "utilisateur")
     public JAXBElement<Utilisateur> createUtilisateur(Utilisateur value) {
         return new JAXBElement<Utilisateur>(_Utilisateur_QNAME, Utilisateur.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ReservationResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://wsService.ws.oc.com/", name = "reservationResponse")
-    public JAXBElement<ReservationResponse> createReservationResponse(ReservationResponse value) {
-        return new JAXBElement<ReservationResponse>(_ReservationResponse_QNAME, ReservationResponse.class, null, value);
     }
 
     /**
@@ -456,15 +447,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Pret }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://wsService.ws.oc.com/", name = "pret")
-    public JAXBElement<Pret> createPret(Pret value) {
-        return new JAXBElement<Pret>(_Pret_QNAME, Pret.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link SupprimerLivre }{@code >}}
      * 
      */
@@ -543,6 +525,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://wsService.ws.oc.com/", name = "reservations")
     public JAXBElement<Reservations> createReservations(Reservations value) {
         return new JAXBElement<Reservations>(_Reservations_QNAME, Reservations.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ReserverResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://wsService.ws.oc.com/", name = "reserverResponse")
+    public JAXBElement<ReserverResponse> createReserverResponse(ReserverResponse value) {
+        return new JAXBElement<ReserverResponse>(_ReserverResponse_QNAME, ReserverResponse.class, null, value);
     }
 
     /**
@@ -651,6 +642,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://wsService.ws.oc.com/", name = "IOException")
     public JAXBElement<IOException> createIOException(IOException value) {
         return new JAXBElement<IOException>(_IOException_QNAME, IOException.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Reserver }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://wsService.ws.oc.com/", name = "reserver")
+    public JAXBElement<Reserver> createReserver(Reserver value) {
+        return new JAXBElement<Reserver>(_Reserver_QNAME, Reserver.class, null, value);
     }
 
     /**

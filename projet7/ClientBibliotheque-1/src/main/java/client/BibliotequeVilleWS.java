@@ -110,12 +110,12 @@ public interface BibliotequeVilleWS {
      * @throws IOException_Exception
      */
     @WebMethod
-    @RequestWrapper(localName = "reservation", targetNamespace = "http://wsService.ws.oc.com/", className = "client.Reservation")
-    @ResponseWrapper(localName = "reservationResponse", targetNamespace = "http://wsService.ws.oc.com/", className = "client.ReservationResponse")
-    @Action(input = "http://wsService.ws.oc.com/BibliotequeVilleWS/reservationRequest", output = "http://wsService.ws.oc.com/BibliotequeVilleWS/reservationResponse", fault = {
-        @FaultAction(className = IOException_Exception.class, value = "http://wsService.ws.oc.com/BibliotequeVilleWS/reservation/Fault/IOException")
+    @RequestWrapper(localName = "reserver", targetNamespace = "http://wsService.ws.oc.com/", className = "client.Reserver")
+    @ResponseWrapper(localName = "reserverResponse", targetNamespace = "http://wsService.ws.oc.com/", className = "client.ReserverResponse")
+    @Action(input = "http://wsService.ws.oc.com/BibliotequeVilleWS/reserverRequest", output = "http://wsService.ws.oc.com/BibliotequeVilleWS/reserverResponse", fault = {
+        @FaultAction(className = IOException_Exception.class, value = "http://wsService.ws.oc.com/BibliotequeVilleWS/reserver/Fault/IOException")
     })
-    public void reservation(
+    public void reserver(
         @WebParam(name = "Nomutilisateur", targetNamespace = "")
         String nomutilisateur,
         @WebParam(name = "prenom", targetNamespace = "")
@@ -251,7 +251,7 @@ public interface BibliotequeVilleWS {
     /**
      * 
      * @return
-     *     returns java.util.List<client.Pret>
+     *     returns java.util.List<client.Reservation>
      * @throws IOException_Exception
      */
     @WebMethod(operationName = "ListPret")
@@ -261,7 +261,7 @@ public interface BibliotequeVilleWS {
     @Action(input = "http://wsService.ws.oc.com/BibliotequeVilleWS/ListPretRequest", output = "http://wsService.ws.oc.com/BibliotequeVilleWS/ListPretResponse", fault = {
         @FaultAction(className = IOException_Exception.class, value = "http://wsService.ws.oc.com/BibliotequeVilleWS/ListPret/Fault/IOException")
     })
-    public List<Pret> listPret()
+    public List<Reservation> listPret()
         throws IOException_Exception
     ;
 

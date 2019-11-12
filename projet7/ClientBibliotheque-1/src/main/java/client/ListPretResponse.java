@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="return" type="{http://wsService.ws.oc.com/}pret" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="return" type="{http://wsService.ws.oc.com/}reservation" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
 public class ListPretResponse {
 
     @XmlElement(name = "return")
-    protected List<Pret> _return;
+    protected List<Reservation> _return;
 
     /**
      * Gets the value of the return property.
@@ -55,13 +55,13 @@ public class ListPretResponse {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Pret }
+     * {@link Reservation }
      * 
      * 
      */
-    public List<Pret> getReturn() {
+    public List<Reservation> getReturn() {
         if (_return == null) {
-            _return = new ArrayList<Pret>();
+            _return = new ArrayList<Reservation>();
         }
         return this._return;
     }
