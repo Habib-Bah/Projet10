@@ -12,17 +12,12 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import com.oc.ws.config.AppConfig;
 import com.oc.ws.config.Configuration;
 import com.oc.ws.entity.Livre;
-import com.oc.ws.entity.Pret;
+import com.oc.ws.entity.Prolongation;
 import com.oc.ws.entity.Reservation;
 import com.oc.ws.entity.Reservations;
 import com.oc.ws.entity.Utilisateur;
-import com.oc.ws.service.LivreService;
-import com.oc.ws.service.UtilisateurService;
 
 @WebService(name = "BibliotequeVilleWS")
 public class Bibliotheque {
@@ -517,5 +512,81 @@ public class Bibliotheque {
 			e.printStackTrace();
 		}
 	}
+	
+	@WebMethod(operationName = "prolongations")
+	public void prolongations(@WebParam(name = "email") String email,
+			@WebParam(name = "titrelivre") String titrelivre, @WebParam(name = "nombre") int nombre) throws IOException {
+		
+		Configuration conf = new Configuration();
 
+		try {
+
+			Class.forName("org.postgresql.Driver").newInstance();
+			connection = DriverManager.getConnection(conf.getMotDepasse());
+
+			statement = connection.createStatement();
+			String sql = "insert into prolongation (email, titrelivre, nombre) values ( '" + email + "', '" + titrelivre + "', '" + nombre + "')";
+			result = statement.executeQuery(sql);
+
+			while (result.next()) {
+				Prolongation pr = new Prolongation();
+				pr.setEmail(result.getString(1));
+				pr.setTitrelivre(result.getString(2));
+				pr.setNombre(result.getInt(3));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@WebMethod(operationName = "listeprolongations")
+	public List<Prolongation> listeprolongations() throws IOException {
+		List<Prolongation> listePr = new ArrayList<>();
+		Configuration conf = new Configuration();
+
+		try {
+
+			Class.forName("org.postgresql.Driver").newInstance();
+			connection = DriverManager.getConnection(conf.getMotDepasse());
+
+			statement = connection.createStatement();
+			String sql = "select * from prolongation";
+			result = statement.executeQuery(sql);
+
+			while (result.next()) {
+				Prolongation pr = new Prolongation();
+				pr.setEmail(result.getString(1));
+				pr.setTitrelivre(result.getString(2));
+				pr.setNombre(result.getInt(3));
+				listePr.add(pr);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return listePr;
+	}
+
+	@WebMethod(operationName = "Supprimerprolongation")
+	public void Supprimerprolongation(@WebParam(name = "email") String email,
+			@WebParam(name = "titrelivre") String titrelivre) throws IOException {
+		
+		Configuration conf = new Configuration();
+
+		try {
+
+			Class.forName("org.postgresql.Driver").newInstance();
+			connection = DriverManager.getConnection(conf.getMotDepasse());
+
+			statement = connection.createStatement();
+			String sql = "delete from prolongation where titrelivre like '" + titrelivre + "' and email like '" + email
+					+ "'";
+			statement.executeQuery(sql);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

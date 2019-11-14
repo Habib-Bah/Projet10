@@ -1,6 +1,7 @@
 package com.opendevup.controller;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -244,7 +245,7 @@ public class EmployeController {
 	}
 
 	@RequestMapping(value = "/EProlonger", method = RequestMethod.POST)
-	public String EProlonger(Model model, Reservation r) throws IOException_Exception {
+	public String EProlonger(Model model, Reservation r) throws IOException_Exception, ParseException {
 
 		client.BibliothequeService livreS = new client.BibliothequeService();
 		client.BibliotequeVilleWS bib = livreS.getBibliotequeVilleWSPort();
@@ -258,12 +259,16 @@ public class EmployeController {
 
 		for (Reservation p : Res) {
 
-			String pattern = "dd/MM/yyyy";
-			DateFormat df = new SimpleDateFormat(pattern);
-			Date today = Calendar.getInstance().getTime();
-			String datedebut = df.format(today);
-			today.setMonth(today.getMonth() + 1);
-			String datefin = df.format(today);
+
+			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+	        String dateInString = p.getDatefin();
+
+	        
+
+	            Date today = formatter.parse(dateInString);
+	            String datedebut = formatter.format(today);
+				today.setMonth(today.getMonth() + 1);
+				String datefin = formatter.format(today);
 
 			if (p.getEmail().equalsIgnoreCase(r.getEmail()) && p.getTitrelivre().equalsIgnoreCase(r.getTitrelivre())) {
 
@@ -291,9 +296,6 @@ public class EmployeController {
 					}
 
 					bib.retour(r.getEmail(), r.getTitrelivre());
-					bib.supprimerLivre(r.getTitrelivre());
-					bib.ajouterLivre(livre.getTitre(), livre.getNombredepages(), livre.getCategorie(),
-							livre.getAuteur(), livre.getNombreexemplaire());
 					bib.reserver(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(), datedebut, datefin,
 							r.getEmail(), r.getCode());
 

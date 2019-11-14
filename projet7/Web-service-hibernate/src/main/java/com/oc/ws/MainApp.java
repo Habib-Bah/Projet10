@@ -5,17 +5,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import javax.xml.ws.Endpoint;
 
 import com.oc.ws.config.Configuration;
-import com.oc.ws.entity.Livre;
 import com.oc.ws.wsService.Bibliotheque;
 
 public class MainApp {
@@ -26,8 +22,8 @@ public class MainApp {
 		Endpoint.publish(url, new Bibliotheque());
 		System.out.println(url);
 
+		/*
 		
-	/*	
 		Connection connection;
 		Statement statement;
 		ResultSet result;
@@ -62,8 +58,8 @@ public class MainApp {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		*/
+		
 	}
 
 }

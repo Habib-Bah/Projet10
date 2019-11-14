@@ -36,22 +36,29 @@ public class ObjectFactory {
     private final static QName _Reservation_QNAME = new QName("http://wsService.ws.oc.com/", "reservation");
     private final static QName _ListPretResponse_QNAME = new QName("http://wsService.ws.oc.com/", "ListPretResponse");
     private final static QName _SupprimerLivre_QNAME = new QName("http://wsService.ws.oc.com/", "supprimerLivre");
+    private final static QName _Listeprolongations_QNAME = new QName("http://wsService.ws.oc.com/", "listeprolongations");
     private final static QName _ListPret_QNAME = new QName("http://wsService.ws.oc.com/", "ListPret");
     private final static QName _ConnexionEquipe_QNAME = new QName("http://wsService.ws.oc.com/", "connexionEquipe");
     private final static QName _RetourResponse_QNAME = new QName("http://wsService.ws.oc.com/", "RetourResponse");
     private final static QName _USerReservation_QNAME = new QName("http://wsService.ws.oc.com/", "USerReservation");
     private final static QName _USerReservationResponse_QNAME = new QName("http://wsService.ws.oc.com/", "USerReservationResponse");
     private final static QName _Connexion_QNAME = new QName("http://wsService.ws.oc.com/", "connexion");
+    private final static QName _Prolongation_QNAME = new QName("http://wsService.ws.oc.com/", "prolongation");
     private final static QName _Listedeslivres_QNAME = new QName("http://wsService.ws.oc.com/", "Listedeslivres");
     private final static QName _Reservations_QNAME = new QName("http://wsService.ws.oc.com/", "reservations");
     private final static QName _ReserverResponse_QNAME = new QName("http://wsService.ws.oc.com/", "reserverResponse");
     private final static QName _ConnexionEquipeResponse_QNAME = new QName("http://wsService.ws.oc.com/", "connexionEquipeResponse");
     private final static QName _Prolongerpret_QNAME = new QName("http://wsService.ws.oc.com/", "prolongerpret");
     private final static QName _TrouverlivreResponse_QNAME = new QName("http://wsService.ws.oc.com/", "trouverlivreResponse");
+    private final static QName _SupprimerprolongationResponse_QNAME = new QName("http://wsService.ws.oc.com/", "SupprimerprolongationResponse");
     private final static QName _ConnexionResponse_QNAME = new QName("http://wsService.ws.oc.com/", "connexionResponse");
     private final static QName _ListedeslivresResponse_QNAME = new QName("http://wsService.ws.oc.com/", "ListedeslivresResponse");
+    private final static QName _Supprimerprolongation_QNAME = new QName("http://wsService.ws.oc.com/", "Supprimerprolongation");
     private final static QName _ListUser_QNAME = new QName("http://wsService.ws.oc.com/", "listUser");
+    private final static QName _ListeprolongationsResponse_QNAME = new QName("http://wsService.ws.oc.com/", "listeprolongationsResponse");
     private final static QName _AjouterLivreResponse_QNAME = new QName("http://wsService.ws.oc.com/", "ajouterLivreResponse");
+    private final static QName _ProlongationsResponse_QNAME = new QName("http://wsService.ws.oc.com/", "prolongationsResponse");
+    private final static QName _Prolongations_QNAME = new QName("http://wsService.ws.oc.com/", "prolongations");
     private final static QName _ListAttenteResponse_QNAME = new QName("http://wsService.ws.oc.com/", "ListAttenteResponse");
     private final static QName _Trouverlivre_QNAME = new QName("http://wsService.ws.oc.com/", "trouverlivre");
     private final static QName _ListUserResponse_QNAME = new QName("http://wsService.ws.oc.com/", "listUserResponse");
@@ -100,11 +107,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Listeprolongations }
+     * 
+     */
+    public Listeprolongations createListeprolongations() {
+        return new Listeprolongations();
+    }
+
+    /**
      * Create an instance of {@link Connexion }
      * 
      */
     public Connexion createConnexion() {
         return new Connexion();
+    }
+
+    /**
+     * Create an instance of {@link Prolongation }
+     * 
+     */
+    public Prolongation createProlongation() {
+        return new Prolongation();
     }
 
     /**
@@ -284,6 +307,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link SupprimerprolongationResponse }
+     * 
+     */
+    public SupprimerprolongationResponse createSupprimerprolongationResponse() {
+        return new SupprimerprolongationResponse();
+    }
+
+    /**
      * Create an instance of {@link ConnexionResponse }
      * 
      */
@@ -332,6 +363,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ProlongationsResponse }
+     * 
+     */
+    public ProlongationsResponse createProlongationsResponse() {
+        return new ProlongationsResponse();
+    }
+
+    /**
+     * Create an instance of {@link Prolongations }
+     * 
+     */
+    public Prolongations createProlongations() {
+        return new Prolongations();
+    }
+
+    /**
      * Create an instance of {@link ListedeslivresResponse }
      * 
      */
@@ -340,11 +387,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Supprimerprolongation }
+     * 
+     */
+    public Supprimerprolongation createSupprimerprolongation() {
+        return new Supprimerprolongation();
+    }
+
+    /**
      * Create an instance of {@link ListUser }
      * 
      */
     public ListUser createListUser() {
         return new ListUser();
+    }
+
+    /**
+     * Create an instance of {@link ListeprolongationsResponse }
+     * 
+     */
+    public ListeprolongationsResponse createListeprolongationsResponse() {
+        return new ListeprolongationsResponse();
     }
 
     /**
@@ -456,6 +519,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Listeprolongations }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://wsService.ws.oc.com/", name = "listeprolongations")
+    public JAXBElement<Listeprolongations> createListeprolongations(Listeprolongations value) {
+        return new JAXBElement<Listeprolongations>(_Listeprolongations_QNAME, Listeprolongations.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link ListPret }{@code >}}
      * 
      */
@@ -507,6 +579,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://wsService.ws.oc.com/", name = "connexion")
     public JAXBElement<Connexion> createConnexion(Connexion value) {
         return new JAXBElement<Connexion>(_Connexion_QNAME, Connexion.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Prolongation }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://wsService.ws.oc.com/", name = "prolongation")
+    public JAXBElement<Prolongation> createProlongation(Prolongation value) {
+        return new JAXBElement<Prolongation>(_Prolongation_QNAME, Prolongation.class, null, value);
     }
 
     /**
@@ -564,6 +645,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SupprimerprolongationResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://wsService.ws.oc.com/", name = "SupprimerprolongationResponse")
+    public JAXBElement<SupprimerprolongationResponse> createSupprimerprolongationResponse(SupprimerprolongationResponse value) {
+        return new JAXBElement<SupprimerprolongationResponse>(_SupprimerprolongationResponse_QNAME, SupprimerprolongationResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link ConnexionResponse }{@code >}}
      * 
      */
@@ -582,6 +672,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Supprimerprolongation }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://wsService.ws.oc.com/", name = "Supprimerprolongation")
+    public JAXBElement<Supprimerprolongation> createSupprimerprolongation(Supprimerprolongation value) {
+        return new JAXBElement<Supprimerprolongation>(_Supprimerprolongation_QNAME, Supprimerprolongation.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link ListUser }{@code >}}
      * 
      */
@@ -591,12 +690,39 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ListeprolongationsResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://wsService.ws.oc.com/", name = "listeprolongationsResponse")
+    public JAXBElement<ListeprolongationsResponse> createListeprolongationsResponse(ListeprolongationsResponse value) {
+        return new JAXBElement<ListeprolongationsResponse>(_ListeprolongationsResponse_QNAME, ListeprolongationsResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link AjouterLivreResponse }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://wsService.ws.oc.com/", name = "ajouterLivreResponse")
     public JAXBElement<AjouterLivreResponse> createAjouterLivreResponse(AjouterLivreResponse value) {
         return new JAXBElement<AjouterLivreResponse>(_AjouterLivreResponse_QNAME, AjouterLivreResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ProlongationsResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://wsService.ws.oc.com/", name = "prolongationsResponse")
+    public JAXBElement<ProlongationsResponse> createProlongationsResponse(ProlongationsResponse value) {
+        return new JAXBElement<ProlongationsResponse>(_ProlongationsResponse_QNAME, ProlongationsResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Prolongations }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://wsService.ws.oc.com/", name = "prolongations")
+    public JAXBElement<Prolongations> createProlongations(Prolongations value) {
+        return new JAXBElement<Prolongations>(_Prolongations_QNAME, Prolongations.class, null, value);
     }
 
     /**
