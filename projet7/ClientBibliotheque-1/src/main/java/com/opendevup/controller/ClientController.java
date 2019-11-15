@@ -321,12 +321,29 @@ public class ClientController {
 								Reservations res = (Reservations) listeAtt.get(listeAtt.size() - 1);
 								bib.reserverEnAvance(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(), r.getEmail(), r.getCode(), res.getNumero() + 1);
 							}
-							
-							
+													
 							return "pasdexemplaire";
 						}
 						
-						else {
+						if(!l.getTitre().equalsIgnoreCase(r.getTitrelivre())) {
+							
+							if(l.getNombreexemplaire() == 0) {
+								
+								
+								if(listeAtt.isEmpty()) {
+									bib.reserverEnAvance(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(), r.getEmail(), r.getCode(), 1);
+									
+								}
+								else {
+									Reservations res = (Reservations) listeAtt.get(listeAtt.size() - 1);
+									bib.reserverEnAvance(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(), r.getEmail(), r.getCode(), res.getNumero() + 1);
+								}
+														
+								return "pasdexemplaire";
+							}
+						}
+						
+					}
 							Livre livre = new Livre();
 							livre.setAuteur(l.getAuteur());
 							livre.setCategorie(l.getCategorie());
@@ -340,8 +357,6 @@ public class ClientController {
 							listeL = bib.listedeslivres();
 							return "ConfReser";
 
-						}
-					}
 					
 				}	
 				

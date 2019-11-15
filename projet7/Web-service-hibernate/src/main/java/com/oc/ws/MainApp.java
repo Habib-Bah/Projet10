@@ -22,15 +22,15 @@ public class MainApp {
 		Endpoint.publish(url, new Bibliotheque());
 		System.out.println(url);
 
-		/*
+	/*	
 		
 		Connection connection;
 		Statement statement;
 		ResultSet result;
 		
 		
-		String auteur = "Roberta";
-		String titre = "Les passions de papa";
+		String auteur = "Alain Damasio";
+		String titre = "La Horde du Contrevent ";
 		int nombredepages = 250;
 		int nombreexemplaire = 1;
 		String categorie = "Roman";
@@ -58,8 +58,8 @@ public class MainApp {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		*/
 		
+		*/
 	}
 
 }
