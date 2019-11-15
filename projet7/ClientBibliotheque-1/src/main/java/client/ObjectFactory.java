@@ -37,11 +37,13 @@ public class ObjectFactory {
     private final static QName _ListPretResponse_QNAME = new QName("http://wsService.ws.oc.com/", "ListPretResponse");
     private final static QName _SupprimerLivre_QNAME = new QName("http://wsService.ws.oc.com/", "supprimerLivre");
     private final static QName _Listeprolongations_QNAME = new QName("http://wsService.ws.oc.com/", "listeprolongations");
+    private final static QName _SupprimerReservations_QNAME = new QName("http://wsService.ws.oc.com/", "SupprimerReservations");
     private final static QName _ListPret_QNAME = new QName("http://wsService.ws.oc.com/", "ListPret");
     private final static QName _ConnexionEquipe_QNAME = new QName("http://wsService.ws.oc.com/", "connexionEquipe");
     private final static QName _RetourResponse_QNAME = new QName("http://wsService.ws.oc.com/", "RetourResponse");
     private final static QName _USerReservation_QNAME = new QName("http://wsService.ws.oc.com/", "USerReservation");
     private final static QName _USerReservationResponse_QNAME = new QName("http://wsService.ws.oc.com/", "USerReservationResponse");
+    private final static QName _SupprimerReservationsResponse_QNAME = new QName("http://wsService.ws.oc.com/", "SupprimerReservationsResponse");
     private final static QName _Connexion_QNAME = new QName("http://wsService.ws.oc.com/", "connexion");
     private final static QName _Prolongation_QNAME = new QName("http://wsService.ws.oc.com/", "prolongation");
     private final static QName _Listedeslivres_QNAME = new QName("http://wsService.ws.oc.com/", "Listedeslivres");
@@ -72,6 +74,14 @@ public class ObjectFactory {
      * 
      */
     public ObjectFactory() {
+    }
+
+    /**
+     * Create an instance of {@link SupprimerReservations }
+     * 
+     */
+    public SupprimerReservations createSupprimerReservations() {
+        return new SupprimerReservations();
     }
 
     /**
@@ -112,6 +122,14 @@ public class ObjectFactory {
      */
     public Listeprolongations createListeprolongations() {
         return new Listeprolongations();
+    }
+
+    /**
+     * Create an instance of {@link SupprimerReservationsResponse }
+     * 
+     */
+    public SupprimerReservationsResponse createSupprimerReservationsResponse() {
+        return new SupprimerReservationsResponse();
     }
 
     /**
@@ -528,6 +546,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SupprimerReservations }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://wsService.ws.oc.com/", name = "SupprimerReservations")
+    public JAXBElement<SupprimerReservations> createSupprimerReservations(SupprimerReservations value) {
+        return new JAXBElement<SupprimerReservations>(_SupprimerReservations_QNAME, SupprimerReservations.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link ListPret }{@code >}}
      * 
      */
@@ -570,6 +597,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://wsService.ws.oc.com/", name = "USerReservationResponse")
     public JAXBElement<USerReservationResponse> createUSerReservationResponse(USerReservationResponse value) {
         return new JAXBElement<USerReservationResponse>(_USerReservationResponse_QNAME, USerReservationResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SupprimerReservationsResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://wsService.ws.oc.com/", name = "SupprimerReservationsResponse")
+    public JAXBElement<SupprimerReservationsResponse> createSupprimerReservationsResponse(SupprimerReservationsResponse value) {
+        return new JAXBElement<SupprimerReservationsResponse>(_SupprimerReservationsResponse_QNAME, SupprimerReservationsResponse.class, null, value);
     }
 
     /**

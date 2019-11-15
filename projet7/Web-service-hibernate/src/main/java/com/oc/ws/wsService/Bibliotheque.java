@@ -461,6 +461,29 @@ public class Bibliotheque {
 		}
 		return attente;
 	}
+	
+	
+	@WebMethod(operationName = "SupprimerReservations")
+	public void SupprimerReservations(@WebParam(name = "email") String email,
+			@WebParam(name = "titrelivre") String titrelivre) throws IOException {
+		
+		Configuration conf = new Configuration();
+
+		try {
+
+			Class.forName("org.postgresql.Driver").newInstance();
+			connection = DriverManager.getConnection(conf.getMotDepasse());
+
+			statement = connection.createStatement();
+			String sql = "delete from reservations where titrelivre like '" + titrelivre + "' and email like '" + email
+					+ "'";
+			statement.executeQuery(sql);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 
 	@WebMethod(operationName = "ajouterLivre")
 	public void ajouterLivre(@WebParam(name = "titre") String titre,

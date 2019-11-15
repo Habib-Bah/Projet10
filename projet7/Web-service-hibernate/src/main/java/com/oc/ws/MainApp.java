@@ -12,6 +12,7 @@ import java.util.Date;
 import javax.xml.ws.Endpoint;
 
 import com.oc.ws.config.Configuration;
+import com.oc.ws.entity.Livre;
 import com.oc.ws.wsService.Bibliotheque;
 
 public class MainApp {
@@ -22,22 +23,19 @@ public class MainApp {
 		Endpoint.publish(url, new Bibliotheque());
 		System.out.println(url);
 
-	/*	
+	/*
 		
 		Connection connection;
 		Statement statement;
 		ResultSet result;
 		
 		
-<<<<<<< HEAD
-		String auteur = "Alain Damasio";
-		String titre = "La Horde du Contrevent ";
-=======
-		String auteur = "Robert Warrent";
-		String titre = "Les fous du roi";
->>>>>>> Ticket2
+		
+		String auteur = "Hans Christian Andersen";
+		String titre = "La reine des neiges";
+		
 		int nombredepages = 250;
-		int nombreexemplaire = 15;
+		int nombreexemplaire = 1;
 		String categorie = "Roman";
 		
 		
@@ -65,6 +63,19 @@ public class MainApp {
 		}
 		
 		*/
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String dateInString = "07/06/2013";
+
+        try {
+
+            Date date = formatter.parse(dateInString);
+            System.out.println(date);
+            System.out.println(formatter.format(date));
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 	}
 
 }

@@ -26,7 +26,6 @@ import client.Reservations;
 import client.Retour;
 import client.Utilisateur;
 
-
 @Controller
 public class ClientController {
 
@@ -42,28 +41,26 @@ public class ClientController {
 
 		BibliothequeService livreS = new BibliothequeService();
 		BibliotequeVilleWS bib = livreS.getBibliotequeVilleWSPort();
-		
-		List<Utilisateur> listeU= bib.listUser();
-		
-		for(Utilisateur ut : listeU) {
-			
-			if(ut.getCode().equals(u.getCode())) {
+
+		List<Utilisateur> listeU = bib.listUser();
+
+		for (Utilisateur ut : listeU) {
+
+			if (ut.getCode().equals(u.getCode())) {
 				return "mauvaisCode";
 			}
-			if(ut.getEmail().equals(u.getEmail())) {
+			if (ut.getEmail().equals(u.getEmail())) {
 				return "mauvaisE";
-			
+
+			}
+
 		}
-			
-	 }
-		
-		
 
 		bib.inscription(u.getUserName(), u.getPrenom(), u.getEmail(), u.getEncrytedPassword(), "user", u.getCode());
 
 		return "resultatInscription";
 	}
-	
+
 	@RequestMapping(value = "/Connexion", method = RequestMethod.GET)
 	public String Connexion(Model model) {
 
@@ -80,10 +77,10 @@ public class ClientController {
 		boolean res = bib.connexion(u.getEmail(), u.getEncrytedPassword());
 
 		if (res == true) {
-			List <Livre> listelivre = new ArrayList();
+			List<Livre> listelivre = new ArrayList();
 			listelivre = bib.listedeslivres();
 			model.addAttribute("listelivre", listelivre);
-			
+
 			return "listeL";
 		}
 
@@ -92,21 +89,20 @@ public class ClientController {
 		}
 
 	}
-	
-	
+
 	@RequestMapping(value = "/ListeL", method = RequestMethod.GET)
 	public String ListeL(Model model) throws IOException_Exception {
-		
+
 		BibliothequeService livreS = new BibliothequeService();
 		BibliotequeVilleWS bib = livreS.getBibliotequeVilleWSPort();
-		
-		List <Livre> listelivre = new ArrayList();
+
+		List<Livre> listelivre = new ArrayList();
 		listelivre = bib.listedeslivres();
 		model.addAttribute("listelivre", listelivre);
-		
+
 		return "listeL";
 	}
-	
+
 	@RequestMapping(value = "/reserV", method = RequestMethod.POST)
 	public String reserV(Model model, AppUser u) {
 
@@ -115,42 +111,39 @@ public class ClientController {
 
 		return "resultatReservation";
 	}
-	
+
 	@RequestMapping(value = "/Livre")
 	public String ListLivre(Model model) {
 
 		return "livre";
 	}
-	
+
 	@RequestMapping(value = "/Deconnection")
 	public String Deconnection(Model model) {
 
 		return "deconnection";
 	}
-	
+
 	@RequestMapping(value = "/Reservation", method = RequestMethod.GET)
 	public String Reservation(Model model) {
-		
-		
+
 		model.addAttribute("reservation", new Reservation());
-		
+
 		return "reservations";
 	}
-	
+
 	@RequestMapping(value = "/findReservation", method = RequestMethod.POST)
 	public String findReservation(Model model, Reservation r) throws IOException_Exception {
 
 		client.BibliothequeService livreS = new client.BibliothequeService();
 		client.BibliotequeVilleWS bib = livreS.getBibliotequeVilleWSPort();
-	
-		
-		
+
 		java.util.List<Reservation> pret = new ArrayList<>();
 		pret = bib.listPret();
-		java.util.List<Pret>  prets = new ArrayList<>();
-		
-		for(Reservation p : pret) {
-			if(p.getCode().equalsIgnoreCase(r.getCode())) {
+		java.util.List<Pret> prets = new ArrayList<>();
+
+		for (Reservation p : pret) {
+			if (p.getCode().equalsIgnoreCase(r.getCode())) {
 				Pret pr = new Pret();
 				pr.setNomutilisateur(p.getNomutilisateur());
 				pr.setPrenom(r.getPrenom());
@@ -160,48 +153,42 @@ public class ClientController {
 				pr.setDatefin(p.getDatefin());
 				pr.setCode(p.getCode());
 				prets.add(pr);
-				
-				
+
 			}
 		}
-		
+
 		model.addAttribute("prets", prets);
-		
+
 		return "resultReservation";
-		
-		
+
 	}
-	
-	
+
 	@RequestMapping(value = "/Retour", method = RequestMethod.GET)
 	public String touverpret(Model model) {
-		
+
 		model.addAttribute("retour", new Retour());
-		
+
 		return "RetourDePret";
 	}
-	
+
 	@RequestMapping(value = "/SaveRetour", method = RequestMethod.POST)
 	public String SaveRetour(Model model, Retour r) throws IOException_Exception {
 
-		
 		client.BibliothequeService livreS = new client.BibliothequeService();
 		client.BibliotequeVilleWS bib = livreS.getBibliotequeVilleWSPort();
-		
+
 		java.util.List<Reservation> pret = new ArrayList<>();
 		pret = bib.listPret();
-		
-		for(Reservation p : pret) {
-			
-			
-			if(p.getEmail().equalsIgnoreCase(r.getEmail()) && p.getTitrelivre().equalsIgnoreCase(r.getTitrelivre())) {
+
+		for (Reservation p : pret) {
+
+			if (p.getEmail().equalsIgnoreCase(r.getEmail()) && p.getTitrelivre().equalsIgnoreCase(r.getTitrelivre())) {
 				bib.retour(r.getEmail(), r.getTitrelivre());
 				List<Livre> listeL = bib.listedeslivres();
-				
-				for(Livre li : listeL) {
-					if(li.getTitre().equalsIgnoreCase(r.getTitrelivre())) {
-						
-						
+
+				for (Livre li : listeL) {
+					if (li.getTitre().equalsIgnoreCase(r.getTitrelivre())) {
+
 						Livre livre = new Livre();
 						livre.setAuteur(li.getAuteur());
 						livre.setCategorie(li.getCategorie());
@@ -209,48 +196,44 @@ public class ClientController {
 						livre.setNombredepages(li.getNombredepages());
 						livre.setNombreexemplaire(li.getNombreexemplaire() + 1);
 						bib.supprimerLivre(r.getTitrelivre());
-						bib.ajouterLivre(livre.getTitre(), livre.getNombredepages(), livre.getCategorie(), livre.getAuteur(), livre.getNombreexemplaire());
+						bib.ajouterLivre(livre.getTitre(), livre.getNombredepages(), livre.getCategorie(),
+								livre.getAuteur(), livre.getNombreexemplaire());
 						bib.supprimerprolongation(r.getEmail(), r.getTitrelivre());
 					}
 				}
-				
+
 				return "confirmRetour";
 			}
 		}
-		
-		
-		
+
 		return "erreurRetour";
-		
-		
+
 	}
-	
-	
+
 	@RequestMapping(value = "/Sport")
 	public String Sport(Model model) {
 
 		return "sport";
 	}
-	
+
 	@RequestMapping(value = "/Musique")
 	public String Musique(Model model) {
 
 		return "musique";
 	}
-	
-	
+
 	@RequestMapping(value = "/index")
 	public String listeL(Model model) {
 
 		return "index";
 	}
-	
+
 	@RequestMapping(value = "/acceuil")
 	public String acceuil(Model model) {
 
 		return "listeL";
 	}
-	
+
 	@RequestMapping(value = "/RetourDePret", method = RequestMethod.GET)
 	public String RetourDePret(Model model, String titrelivre) {
 
@@ -260,67 +243,59 @@ public class ClientController {
 		model.addAttribute("titrelivre", l.getTitre());
 		return "RetourDePret";
 	}
-	
+
 	@RequestMapping(value = "/ConfirmRetourDePret", method = RequestMethod.POST)
 	public String ConfirmRetourDePret(Model model, Retour r) throws IOException_Exception {
-		
+
 		client.BibliothequeService livreS = new client.BibliothequeService();
 		client.BibliotequeVilleWS bib = livreS.getBibliotequeVilleWSPort();
-		
+
 		bib.retour(r.getEmail(), r.getTitrelivre());
 		bib.supprimerprolongation(r.getEmail(), r.getTitrelivre());
-		
-		
+
 		return "ConfirmRetourDePret";
-		
+
 	}
-	
+
 	@RequestMapping(value = "/reserver", method = RequestMethod.GET)
 	public String reserver(Model model) throws IOException_Exception {
-		
+
 		BibliothequeService livreS = new BibliothequeService();
 		BibliotequeVilleWS bib = livreS.getBibliotequeVilleWSPort();
-		
-		List <Livre> listelivre = new ArrayList();
+
+		List<Livre> listelivre = new ArrayList();
 		listelivre = bib.listedeslivres();
 		model.addAttribute("listelivre", listelivre);
-		model.addAttribute("reservation", new Reservation()); 
+		model.addAttribute("reservation", new Reservation());
 
 		return "reserver";
 	}
-	
+
 	@RequestMapping(value = "/CReserver", method = RequestMethod.POST)
 	public String CReserver(Model model, Reservation r) throws IOException_Exception {
-		
+
 		client.BibliothequeService livreS = new client.BibliothequeService();
 		client.BibliotequeVilleWS bib = livreS.getBibliotequeVilleWSPort();
-		
-		
-		
-		List <Reservation> prets = new ArrayList<>();
-		List <Utilisateur> users = new ArrayList<>();
-		List <Livre> listeL = new ArrayList<>();
-		List<Reservations> listeAtt= new ArrayList<>();
-		
+
+		List<Reservation> prets = new ArrayList<>();
+		List<Utilisateur> users = new ArrayList<>();
+		List<Livre> listeL = new ArrayList<>();
+		List<Reservations> listeAtt = new ArrayList<>();
+
 		prets = bib.listPret();
 		users = bib.listUser();
-		
-		
-		for(Reservation p : prets) {
-			
-			if(p.getEmail().equalsIgnoreCase(r.getEmail()) && p.getTitrelivre().equalsIgnoreCase(r.getTitrelivre())) {
-				
+
+		for (Reservation p : prets) {
+
+			if (p.getEmail().equalsIgnoreCase(r.getEmail()) && p.getTitrelivre().equalsIgnoreCase(r.getTitrelivre())) {
+
 				return "LivreDejaReserve";
 			}
 		}
-		
-	
-		
-		for(Utilisateur u : users) {
-			
-			
-			
-			if(u.getEmail().equalsIgnoreCase(r.getEmail()) && u.getCode().equals(r.getCode())) {
+
+		for (Utilisateur u : users) {
+
+			if (u.getEmail().equalsIgnoreCase(r.getEmail()) && u.getCode().equals(r.getCode())) {
 				String pattern = "dd/MM/yyyy";
 				DateFormat df = new SimpleDateFormat(pattern);
 				Date today = Calendar.getInstance().getTime();
@@ -329,69 +304,96 @@ public class ClientController {
 				String datefin = df.format(today);
 				listeL = bib.listedeslivres();
 				listeAtt = bib.listAttente();
-				
-				for(Livre l : listeL) {
-					
-					if(l.getTitre().equalsIgnoreCase(r.getTitrelivre())) {
-						if(l.getNombreexemplaire() == 0) {
-							
-						
-							if(listeAtt.isEmpty()) {
-								bib.reserverEnAvance(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(), r.getEmail(), r.getCode(), 1);
-								
-							}
-							else {
+
+				for (Livre l : listeL) {
+
+					if (l.getTitre().equalsIgnoreCase(r.getTitrelivre())) {
+						if (l.getNombreexemplaire() == 0) {
+
+							if (listeAtt.isEmpty()) {
+								bib.reserverEnAvance(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(),
+										r.getEmail(), r.getCode(), 1);
+
+							} else {
 								Reservations res = (Reservations) listeAtt.get(listeAtt.size() - 1);
-								bib.reserverEnAvance(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(), r.getEmail(), r.getCode(), res.getNumero() + 1);
+
+								for (Reservations RV : listeAtt) {
+
+									if (RV.getEmail().equalsIgnoreCase(r.getEmail())
+											&& RV.getTitrelivre().equalsIgnoreCase(r.getTitrelivre())) {
+										bib.reserverEnAvance(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(),
+												r.getEmail(), r.getCode(), res.getNumero() + 1);
+
+									}
+
+									if (RV.getEmail().equalsIgnoreCase(r.getEmail())
+											&& !RV.getTitrelivre().equalsIgnoreCase(r.getTitrelivre())) {
+										bib.reserverEnAvance(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(),
+												r.getEmail(), r.getCode(), 1);
+									}
+								}
+
 							}
-													
+
 							return "pasdexemplaire";
 						}
-						
-						if(!l.getTitre().equalsIgnoreCase(r.getTitrelivre())) {
-							
-							if(l.getNombreexemplaire() == 0) {
-								
-								
-								if(listeAtt.isEmpty()) {
-									bib.reserverEnAvance(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(), r.getEmail(), r.getCode(), 1);
-									
-								}
-								else {
-									Reservations res = (Reservations) listeAtt.get(listeAtt.size() - 1);
-									bib.reserverEnAvance(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(), r.getEmail(), r.getCode(), res.getNumero() + 1);
-								}
-														
-								return "pasdexemplaire";
-							}
-						}
-						
-					}
+
+						else {
 							Livre livre = new Livre();
 							livre.setAuteur(l.getAuteur());
 							livre.setCategorie(l.getCategorie());
 							livre.setTitre(l.getTitre());
 							livre.setNombredepages(l.getNombredepages());
 							livre.setNombreexemplaire(l.getNombreexemplaire() - 1);
-							
+
 							bib.supprimerLivre(r.getTitrelivre());
-							bib.ajouterLivre(livre.getTitre(), livre.getNombredepages(), livre.getCategorie(), livre.getAuteur(), l.getNombreexemplaire() - 1);
-							bib.reserver(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(), datedebut , datefin, r.getEmail(), r.getCode());
+							bib.ajouterLivre(livre.getTitre(), livre.getNombredepages(), livre.getCategorie(),
+									livre.getAuteur(), l.getNombreexemplaire() - 1);
+							bib.reserver(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(), datedebut, datefin,
+									r.getEmail(), r.getCode());
 							listeL = bib.listedeslivres();
+
+							for (Reservations reser : listeAtt) {
+
+								if (reser.getEmail().equalsIgnoreCase(r.getEmail())
+										&& reser.getTitrelivre().equalsIgnoreCase(r.getTitrelivre())) {
+
+									for (Reservations reser1 : listeAtt) {
+										Reservations finale = new Reservations();
+										finale.setEmail(reser1.getEmail());
+										finale.setNomutilisateur(reser1.getNomutilisateur());
+										finale.setPrenom(reser1.getPrenom());
+										finale.setTitrelivre(reser1.getTitrelivre());
+										finale.setNumero(reser1.getNumero());
+										finale.setCode(reser1.getCode());
+										if (finale.getNumero() == 1) {
+
+											bib.supprimerReservations(finale.getEmail(), finale.getTitrelivre());
+										} else {
+											bib.supprimerReservations(finale.getEmail(), finale.getTitrelivre());
+											bib.reserverEnAvance(finale.getNomutilisateur(), finale.getPrenom(),
+													finale.getTitrelivre(), finale.getEmail(), finale.getCode(),
+													finale.getNumero() - 1);
+										}
+									}
+								}
+							}
+
 							return "ConfReser";
 
-					
-				}	
-				
+						}
+
+					}
+
+				}
+
 			}
 		}
-		
-		
-		return"noEmail";
-		
+
+		return "noEmail";
+
 	}
-	
-	
+
 	@RequestMapping(value = "/Prolonger", method = RequestMethod.GET)
 	public String Prolonger(Model model) {
 
