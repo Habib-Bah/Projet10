@@ -5,13 +5,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.xml.ws.Endpoint;
 
 import com.oc.ws.config.Configuration;
-import com.oc.ws.entity.Livre;
 import com.oc.ws.wsService.Bibliotheque;
 
 public class MainApp {
@@ -29,10 +29,15 @@ public class MainApp {
 		ResultSet result;
 		
 		
+<<<<<<< HEAD
 		String auteur = "Alain Damasio";
 		String titre = "La Horde du Contrevent ";
+=======
+		String auteur = "Robert Warrent";
+		String titre = "Les fous du roi";
+>>>>>>> Ticket2
 		int nombredepages = 250;
-		int nombreexemplaire = 1;
+		int nombreexemplaire = 15;
 		String categorie = "Roman";
 		
 		

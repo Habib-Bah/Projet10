@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Retour</title>
+<title>Erreur</title>
 <link rel="stylesheet" type="text/css" href="style5.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -11,15 +11,14 @@
 <link href='https://fonts.googleapis.com/css?family=Lobster'
 	rel='stylesheet' type='text/css'>
 </head>
-<body>
-	<h3>Votre retour a été enregistré avec succès.</h3> <br>
-	<h3>Vous pouvez reserver a nouveau un autre livre</h3> <br>
-	
-	<h3><p>
-			<a th:href="@{/ListeL}"> Retour</a>
-		</p>
-		
-	</h3>
-	
+        
+        <h3>Vous ne pouvez plus prolonger votre pret</h3>
+        <h3> Vous avez atteint le nombre maximum de prolongation pour un pret</h3>
+        
+        
+       <h3> <a th:href="@{/ListeL}"> Retour</a> </h3>
+        
+           
+    
 </body>
 </html>

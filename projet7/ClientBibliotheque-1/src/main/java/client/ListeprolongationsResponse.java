@@ -10,16 +10,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Classe Java pour ListPretResponse complex type.
+ * <p>Classe Java pour listeprolongationsResponse complex type.
  * 
  * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.
  * 
  * <pre>
- * &lt;complexType name="ListPretResponse">
+ * &lt;complexType name="listeprolongationsResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="return" type="{http://wsService.ws.oc.com/}reservation" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="return" type="{http://wsService.ws.oc.com/}prolongation" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -29,13 +29,13 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ListPretResponse", propOrder = {
+@XmlType(name = "listeprolongationsResponse", propOrder = {
     "_return"
 })
-public class ListPretResponse {
+public class ListeprolongationsResponse {
 
     @XmlElement(name = "return")
-    protected List<Reservation> _return;
+    protected List<Prolongation> _return;
 
     /**
      * Gets the value of the return property.
@@ -55,13 +55,13 @@ public class ListPretResponse {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Reservation }
+     * {@link Prolongation }
      * 
      * 
      */
-    public List<Reservation> getReturn() {
+    public List<Prolongation> getReturn() {
         if (_return == null) {
-            _return = new ArrayList<Reservation>();
+            _return = new ArrayList<Prolongation>();
         }
         return this._return;
     }

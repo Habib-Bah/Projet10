@@ -110,12 +110,12 @@ public interface BibliotequeVilleWS {
      * @throws IOException_Exception
      */
     @WebMethod
-    @RequestWrapper(localName = "reservation", targetNamespace = "http://wsService.ws.oc.com/", className = "client.Reservation")
-    @ResponseWrapper(localName = "reservationResponse", targetNamespace = "http://wsService.ws.oc.com/", className = "client.ReservationResponse")
-    @Action(input = "http://wsService.ws.oc.com/BibliotequeVilleWS/reservationRequest", output = "http://wsService.ws.oc.com/BibliotequeVilleWS/reservationResponse", fault = {
-        @FaultAction(className = IOException_Exception.class, value = "http://wsService.ws.oc.com/BibliotequeVilleWS/reservation/Fault/IOException")
+    @RequestWrapper(localName = "reserver", targetNamespace = "http://wsService.ws.oc.com/", className = "client.Reserver")
+    @ResponseWrapper(localName = "reserverResponse", targetNamespace = "http://wsService.ws.oc.com/", className = "client.ReserverResponse")
+    @Action(input = "http://wsService.ws.oc.com/BibliotequeVilleWS/reserverRequest", output = "http://wsService.ws.oc.com/BibliotequeVilleWS/reserverResponse", fault = {
+        @FaultAction(className = IOException_Exception.class, value = "http://wsService.ws.oc.com/BibliotequeVilleWS/reserver/Fault/IOException")
     })
-    public void reservation(
+    public void reserver(
         @WebParam(name = "Nomutilisateur", targetNamespace = "")
         String nomutilisateur,
         @WebParam(name = "prenom", targetNamespace = "")
@@ -251,7 +251,7 @@ public interface BibliotequeVilleWS {
     /**
      * 
      * @return
-     *     returns java.util.List<client.Pret>
+     *     returns java.util.List<client.Reservation>
      * @throws IOException_Exception
      */
     @WebMethod(operationName = "ListPret")
@@ -261,7 +261,7 @@ public interface BibliotequeVilleWS {
     @Action(input = "http://wsService.ws.oc.com/BibliotequeVilleWS/ListPretRequest", output = "http://wsService.ws.oc.com/BibliotequeVilleWS/ListPretResponse", fault = {
         @FaultAction(className = IOException_Exception.class, value = "http://wsService.ws.oc.com/BibliotequeVilleWS/ListPret/Fault/IOException")
     })
-    public List<Pret> listPret()
+    public List<Reservation> listPret()
         throws IOException_Exception
     ;
 
@@ -377,6 +377,66 @@ public interface BibliotequeVilleWS {
     public void supprimerLivre(
         @WebParam(name = "titre", targetNamespace = "")
         String titre)
+        throws IOException_Exception
+    ;
+
+    /**
+     * 
+     * @param nombre
+     * @param email
+     * @param titrelivre
+     * @throws IOException_Exception
+     */
+    @WebMethod
+    @RequestWrapper(localName = "prolongations", targetNamespace = "http://wsService.ws.oc.com/", className = "client.Prolongations")
+    @ResponseWrapper(localName = "prolongationsResponse", targetNamespace = "http://wsService.ws.oc.com/", className = "client.ProlongationsResponse")
+    @Action(input = "http://wsService.ws.oc.com/BibliotequeVilleWS/prolongationsRequest", output = "http://wsService.ws.oc.com/BibliotequeVilleWS/prolongationsResponse", fault = {
+        @FaultAction(className = IOException_Exception.class, value = "http://wsService.ws.oc.com/BibliotequeVilleWS/prolongations/Fault/IOException")
+    })
+    public void prolongations(
+        @WebParam(name = "email", targetNamespace = "")
+        String email,
+        @WebParam(name = "titrelivre", targetNamespace = "")
+        String titrelivre,
+        @WebParam(name = "nombre", targetNamespace = "")
+        int nombre)
+        throws IOException_Exception
+    ;
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<client.Prolongation>
+     * @throws IOException_Exception
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "listeprolongations", targetNamespace = "http://wsService.ws.oc.com/", className = "client.Listeprolongations")
+    @ResponseWrapper(localName = "listeprolongationsResponse", targetNamespace = "http://wsService.ws.oc.com/", className = "client.ListeprolongationsResponse")
+    @Action(input = "http://wsService.ws.oc.com/BibliotequeVilleWS/listeprolongationsRequest", output = "http://wsService.ws.oc.com/BibliotequeVilleWS/listeprolongationsResponse", fault = {
+        @FaultAction(className = IOException_Exception.class, value = "http://wsService.ws.oc.com/BibliotequeVilleWS/listeprolongations/Fault/IOException")
+    })
+    public List<Prolongation> listeprolongations()
+        throws IOException_Exception
+    ;
+
+    /**
+     * 
+     * @param email
+     * @param titrelivre
+     * @throws IOException_Exception
+     */
+    @WebMethod(operationName = "Supprimerprolongation")
+    @RequestWrapper(localName = "Supprimerprolongation", targetNamespace = "http://wsService.ws.oc.com/", className = "client.Supprimerprolongation")
+    @ResponseWrapper(localName = "SupprimerprolongationResponse", targetNamespace = "http://wsService.ws.oc.com/", className = "client.SupprimerprolongationResponse")
+    @Action(input = "http://wsService.ws.oc.com/BibliotequeVilleWS/SupprimerprolongationRequest", output = "http://wsService.ws.oc.com/BibliotequeVilleWS/SupprimerprolongationResponse", fault = {
+        @FaultAction(className = IOException_Exception.class, value = "http://wsService.ws.oc.com/BibliotequeVilleWS/Supprimerprolongation/Fault/IOException")
+    })
+    public void supprimerprolongation(
+        @WebParam(name = "email", targetNamespace = "")
+        String email,
+        @WebParam(name = "titrelivre", targetNamespace = "")
+        String titrelivre)
         throws IOException_Exception
     ;
 

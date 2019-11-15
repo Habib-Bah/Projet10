@@ -1,6 +1,7 @@
 package com.opendevup.controller;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -20,6 +21,7 @@ import client.IOException_Exception;
 import client.Livre;
 import client.Pret;
 import client.Reservation;
+import client.Reservations;
 import client.Retour;
 import client.Utilisateur;;
 
@@ -89,12 +91,11 @@ public class EmployeController {
 		BibliothequeService livreS = new BibliothequeService();
 		BibliotequeVilleWS bib = livreS.getBibliotequeVilleWSPort();
 
-		java.util.List<Pret> pret = new ArrayList<>();
+		java.util.List<Reservation> pret = new ArrayList<>();
 		pret = bib.listPret();
 
 		model.addAttribute("listprets", pret);
-		
-	
+
 		return "PretEmployee";
 	}
 
@@ -108,22 +109,36 @@ public class EmployeController {
 	@RequestMapping(value = "/SaveRetourE", method = RequestMethod.POST)
 	public String SaveRetourE(Model model, Retour r) throws IOException_Exception {
 
-		BibliothequeService livreS = new BibliothequeService();
-		BibliotequeVilleWS bib = livreS.getBibliotequeVilleWSPort();
+		client.BibliothequeService livreS = new client.BibliothequeService();
+		client.BibliotequeVilleWS bib = livreS.getBibliotequeVilleWSPort();
 
-		
-		java.util.List<Pret> pret = new ArrayList<>();
+		java.util.List<Reservation> pret = new ArrayList<>();
 		pret = bib.listPret();
 
-		for (Pret p : pret) {
+		for (Reservation p : pret) {
 
 			if (p.getEmail().equalsIgnoreCase(r.getEmail()) && p.getTitrelivre().equalsIgnoreCase(r.getTitrelivre())) {
 				bib.retour(r.getEmail(), r.getTitrelivre());
+				List<Livre> listeL = bib.listedeslivres();
+
+				for (Livre li : listeL) {
+					if (li.getTitre().equalsIgnoreCase(r.getTitrelivre())) {
+
+						Livre livre = new Livre();
+						livre.setAuteur(li.getAuteur());
+						livre.setCategorie(li.getCategorie());
+						livre.setTitre(li.getTitre());
+						livre.setNombredepages(li.getNombredepages());
+						livre.setNombreexemplaire(li.getNombreexemplaire() + 1);
+						bib.supprimerLivre(r.getTitrelivre());
+						bib.ajouterLivre(livre.getTitre(), livre.getNombredepages(), livre.getCategorie(),
+								livre.getAuteur(), livre.getNombreexemplaire());
+					}
+				}
 
 				return "SaveRetourE";
 			}
 		}
-
 
 		return "erreurRetourE";
 
@@ -143,40 +158,83 @@ public class EmployeController {
 	}
 
 	@RequestMapping(value = "/SaveRE")
-	public String SaveRE(Model model, Reservation r) throws IOException_Exception  {
+	public String SaveRE(Model model, Reservation r) throws IOException_Exception {
 
-		BibliothequeService livreS = new BibliothequeService();
-		BibliotequeVilleWS bib = livreS.getBibliotequeVilleWSPort();
-		List<Livre> listeL = bib.listedeslivres();
+		client.BibliothequeService livreS = new client.BibliothequeService();
+		client.BibliotequeVilleWS bib = livreS.getBibliotequeVilleWSPort();
 
-		String pattern = "dd/MM/yyyy";
-		DateFormat df = new SimpleDateFormat(pattern);
-		Date today = Calendar.getInstance().getTime();
-		String datedebut = df.format(today);
-		today.setMonth(today.getMonth() + 1);
-		String datefin = df.format(today);
+		List<Reservation> prets = new ArrayList<>();
+		List<Utilisateur> users = new ArrayList<>();
+		List<Livre> listeL = new ArrayList<>();
+		List<Reservations> listeAtt = new ArrayList<>();
 
-		for(Livre l : listeL) {
-			if(l.getNombreexemplaire() == 0) {
-				return "pasdexemplaire";
+		prets = bib.listPret();
+		users = bib.listUser();
+
+		for (Reservation p : prets) {
+
+			if (p.getEmail().equalsIgnoreCase(r.getEmail()) && p.getTitrelivre().equalsIgnoreCase(r.getTitrelivre())) {
+
+				return "LivreDejaReserve";
 			}
-			
-			else {
-				Livre livre = new Livre();
-				livre.setAuteur(l.getAuteur());
-				livre.setCategorie(l.getCategorie());
-				livre.setTitre(l.getTitre());
-				livre.setNombredepages(l.getNombredepages());
-				livre.setNombreexemplaire(l.getNombreexemplaire() - 1);
-				
-				//bib.ajouterLivre
-				//bib.supprimerLivre
-				//bib.reservation(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(), datedebut, datefin, r.getEmail(), r.getCode());
+		}
+
+		for (Utilisateur u : users) {
+
+			if (u.getEmail().equalsIgnoreCase(r.getEmail()) && u.getCode().equals(r.getCode())) {
+				String pattern = "dd/MM/yyyy";
+				DateFormat df = new SimpleDateFormat(pattern);
+				Date today = Calendar.getInstance().getTime();
+				String datedebut = df.format(today);
+				today.setMonth(today.getMonth() + 1);
+				String datefin = df.format(today);
+				listeL = bib.listedeslivres();
+				listeAtt = bib.listAttente();
+
+				for (Livre l : listeL) {
+
+					if (l.getTitre().equalsIgnoreCase(r.getTitrelivre())) {
+						if (l.getNombreexemplaire() == 0) {
+
+							if (listeAtt.isEmpty()) {
+								bib.reserverEnAvance(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(),
+										r.getEmail(), r.getCode(), 1);
+
+							} else {
+								Reservations res = (Reservations) listeAtt.get(listeAtt.size() - 1);
+								bib.reserverEnAvance(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(),
+										r.getEmail(), r.getCode(), res.getNumero() + 1);
+							}
+
+							return "pasdexemplaire";
+						}
+
+						else {
+							Livre livre = new Livre();
+							livre.setAuteur(l.getAuteur());
+							livre.setCategorie(l.getCategorie());
+							livre.setTitre(l.getTitre());
+							livre.setNombredepages(l.getNombredepages());
+							livre.setNombreexemplaire(l.getNombreexemplaire() - 1);
+
+							bib.supprimerLivre(r.getTitrelivre());
+							bib.ajouterLivre(livre.getTitre(), livre.getNombredepages(), livre.getCategorie(),
+									livre.getAuteur(), l.getNombreexemplaire() - 1);
+							bib.reserver(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(), datedebut, datefin,
+									r.getEmail(), r.getCode());
+							listeL = bib.listedeslivres();
+							return "confirmRE";
+
+						}
+					}
+
+				}
 
 			}
 		}
-			
-		return "confirmRE";
+
+		return "noEmail";
+
 	}
 
 	@RequestMapping(value = "/PolongerPourClient", method = RequestMethod.GET)
@@ -185,42 +243,70 @@ public class EmployeController {
 		model.addAttribute("reservation", new Reservation());
 		return "polongerPourClient";
 	}
-	
+
 	@RequestMapping(value = "/EProlonger", method = RequestMethod.POST)
-	public String EProlonger(Model model, Reservation r) throws IOException_Exception {
-		
-		BibliothequeService livreS = new BibliothequeService();
-		BibliotequeVilleWS bib = livreS.getBibliotequeVilleWSPort();
-		
-		
-		java.util.List <Pret> prets = new ArrayList();
-		java.util.List <Utilisateur> users = new ArrayList();
-		
-		prets = bib.listPret();
+	public String EProlonger(Model model, Reservation r) throws IOException_Exception, ParseException {
+
+		client.BibliothequeService livreS = new client.BibliothequeService();
+		client.BibliotequeVilleWS bib = livreS.getBibliotequeVilleWSPort();
+
+		List<Reservation> Res = new ArrayList();
+		List<Utilisateur> users = new ArrayList();
+		List<Livre> listeL = new ArrayList<>();
+
+		Res = bib.listPret();
 		users = bib.listUser();
-		
-		String pattern = "dd/MM/yyyy";
-		DateFormat df = new SimpleDateFormat(pattern);
-		Date today = Calendar.getInstance().getTime();
-		String datedebut = df.format(today);
-		today.setMonth(today.getMonth() + 1);
-		String datefin = df.format(today);
-		
-		
-		for(Pret p : prets) {
-			
-			if(p.getEmail().equalsIgnoreCase(r.getEmail()) && p.getTitrelivre().equalsIgnoreCase(r.getTitrelivre())) {
-				
-				bib.retour(r.getEmail(), r.getTitrelivre());
-				//bib.reservation(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(), datedebut, datefin, r.getEmail());
-				return "confirmationPE";
+
+		for (Reservation p : Res) {
+
+
+			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+	        String dateInString = p.getDatefin();
+
+	        
+
+	            Date today = formatter.parse(dateInString);
+	            String datedebut = formatter.format(today);
+				today.setMonth(today.getMonth() + 1);
+				String datefin = formatter.format(today);
+
+			if (p.getEmail().equalsIgnoreCase(r.getEmail()) && p.getTitrelivre().equalsIgnoreCase(r.getTitrelivre())) {
+
+				if (p.getDatefin().compareTo(datedebut) < 0) {
+
+					return "datefinpasarrivee";
+				}
+				if (p.getDatefin().compareTo(datedebut) == 0 || p.getDatefin().compareTo(datedebut) > 0) {
+
+					listeL = bib.listedeslivres();
+					Livre livre = new Livre();
+
+					for (Livre l : listeL) {
+
+						if (l.getTitre().equalsIgnoreCase(p.getTitrelivre())) {
+
+							livre.setAuteur(l.getAuteur());
+							livre.setCategorie(l.getCategorie());
+							livre.setTitre(l.getTitre());
+							livre.setNombredepages(l.getNombredepages());
+							livre.setNombreexemplaire(l.getNombreexemplaire() - 1);
+
+						}
+
+					}
+
+					bib.retour(r.getEmail(), r.getTitrelivre());
+					bib.reserver(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(), datedebut, datefin,
+							r.getEmail(), r.getCode());
+
+					return "confirmationPE";
+				}
 			}
+
 		}
-		
-		
-		
+
 		return "mauvaisEMailE";
-		
+
 	}
 
 	@RequestMapping(value = "/Horaires")

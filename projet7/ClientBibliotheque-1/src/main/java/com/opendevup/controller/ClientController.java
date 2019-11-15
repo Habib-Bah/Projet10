@@ -1,6 +1,7 @@
 package com.opendevup.controller;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -19,6 +20,7 @@ import client.BibliothequeService;
 import client.IOException_Exception;
 import client.Livre;
 import client.Pret;
+import client.Prolongation;
 import client.Reservation;
 import client.Reservations;
 import client.Retour;
@@ -143,11 +145,11 @@ public class ClientController {
 	
 		
 		
-		java.util.List<Pret> pret = new ArrayList<>();
+		java.util.List<Reservation> pret = new ArrayList<>();
 		pret = bib.listPret();
 		java.util.List<Pret>  prets = new ArrayList<>();
 		
-		for(Pret p : pret) {
+		for(Reservation p : pret) {
 			if(p.getCode().equalsIgnoreCase(r.getCode())) {
 				Pret pr = new Pret();
 				pr.setNomutilisateur(p.getNomutilisateur());
@@ -186,13 +188,31 @@ public class ClientController {
 		client.BibliothequeService livreS = new client.BibliothequeService();
 		client.BibliotequeVilleWS bib = livreS.getBibliotequeVilleWSPort();
 		
-		java.util.List<Pret> pret = new ArrayList<>();
+		java.util.List<Reservation> pret = new ArrayList<>();
 		pret = bib.listPret();
 		
-		for(Pret p : pret) {
+		for(Reservation p : pret) {
+			
 			
 			if(p.getEmail().equalsIgnoreCase(r.getEmail()) && p.getTitrelivre().equalsIgnoreCase(r.getTitrelivre())) {
 				bib.retour(r.getEmail(), r.getTitrelivre());
+				List<Livre> listeL = bib.listedeslivres();
+				
+				for(Livre li : listeL) {
+					if(li.getTitre().equalsIgnoreCase(r.getTitrelivre())) {
+						
+						
+						Livre livre = new Livre();
+						livre.setAuteur(li.getAuteur());
+						livre.setCategorie(li.getCategorie());
+						livre.setTitre(li.getTitre());
+						livre.setNombredepages(li.getNombredepages());
+						livre.setNombreexemplaire(li.getNombreexemplaire() + 1);
+						bib.supprimerLivre(r.getTitrelivre());
+						bib.ajouterLivre(livre.getTitre(), livre.getNombredepages(), livre.getCategorie(), livre.getAuteur(), livre.getNombreexemplaire());
+						bib.supprimerprolongation(r.getEmail(), r.getTitrelivre());
+					}
+				}
 				
 				return "confirmRetour";
 			}
@@ -246,7 +266,10 @@ public class ClientController {
 		
 		client.BibliothequeService livreS = new client.BibliothequeService();
 		client.BibliotequeVilleWS bib = livreS.getBibliotequeVilleWSPort();
+		
 		bib.retour(r.getEmail(), r.getTitrelivre());
+		bib.supprimerprolongation(r.getEmail(), r.getTitrelivre());
+		
 		
 		return "ConfirmRetourDePret";
 		
@@ -274,7 +297,7 @@ public class ClientController {
 		
 		
 		
-		List <Pret> prets = new ArrayList<>();
+		List <Reservation> prets = new ArrayList<>();
 		List <Utilisateur> users = new ArrayList<>();
 		List <Livre> listeL = new ArrayList<>();
 		List<Reservations> listeAtt= new ArrayList<>();
@@ -283,7 +306,7 @@ public class ClientController {
 		users = bib.listUser();
 		
 		
-		for(Pret p : prets) {
+		for(Reservation p : prets) {
 			
 			if(p.getEmail().equalsIgnoreCase(r.getEmail()) && p.getTitrelivre().equalsIgnoreCase(r.getTitrelivre())) {
 				
@@ -353,7 +376,7 @@ public class ClientController {
 							
 							bib.supprimerLivre(r.getTitrelivre());
 							bib.ajouterLivre(livre.getTitre(), livre.getNombredepages(), livre.getCategorie(), livre.getAuteur(), l.getNombreexemplaire() - 1);
-							bib.reservation(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(), datedebut , datefin, r.getEmail(), r.getCode());
+							bib.reserver(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(), datedebut , datefin, r.getEmail(), r.getCode());
 							listeL = bib.listedeslivres();
 							return "ConfReser";
 
@@ -377,38 +400,116 @@ public class ClientController {
 	}
 	
 	@RequestMapping(value = "/CProlonger", method = RequestMethod.POST)
-	public String CProlonger(Model model, Reservation r) throws IOException_Exception {
+	public String CProlonger(Model model, Reservation r) throws IOException_Exception, ParseException {
 		
 		client.BibliothequeService livreS = new client.BibliothequeService();
 		client.BibliotequeVilleWS bib = livreS.getBibliotequeVilleWSPort();
 		
 		
-		List <Pret> prets = new ArrayList();
+		List <Reservation> Res = new ArrayList();
 		List <Utilisateur> users = new ArrayList();
+		List <Livre> listeL = new ArrayList<>();
 		
-		prets = bib.listPret();
+		Res = bib.listPret();
 		users = bib.listUser();
 		
-		String pattern = "dd/MM/yyyy";
-		DateFormat df = new SimpleDateFormat(pattern);
-		Date today = Calendar.getInstance().getTime();
-		String datedebut = df.format(today);
-		today.setMonth(today.getMonth() + 1);
-		String datefin = df.format(today);
-		
-		
-		for(Pret p : prets) {
 			
+		for(Reservation p : Res) {
+		
+		
+			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+	        String dateInString = p.getDatefin();
+
+	        
+
+	            Date today = formatter.parse(dateInString);
+	            String datedebut = formatter.format(today);
+				today.setMonth(today.getMonth() + 1);
+				String datefin = formatter.format(today);
+	           
+	     	
 			if(p.getEmail().equalsIgnoreCase(r.getEmail()) && p.getTitrelivre().equalsIgnoreCase(r.getTitrelivre())) {
 				
-				bib.retour(r.getEmail(), r.getTitrelivre());
-				bib.reservation(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(), datedebut, datefin, r.getEmail(), r.getCode());
-				return "confirmationP";
+				
+				if(p.getDatefin().compareTo(datedebut) < 0) {
+					
+					return "datefinpasarrivee"; 
+				}
+				 if(p.getDatefin().compareTo(datedebut) == 0 || p.getDatefin().compareTo(datedebut) > 0) {
+					
+					 /*******************/
+					 List<Prolongation> listePr = bib.listeprolongations();
+					 
+					 if(listePr.isEmpty()) {
+						 listeL = bib.listedeslivres();
+						    Livre livre = new Livre();
+						   
+						    for(Livre l : listeL) {
+						    	
+						    	if(l.getTitre().equalsIgnoreCase(p.getTitrelivre())) {
+						    		
+						    		
+									livre.setAuteur(l.getAuteur());
+									livre.setCategorie(l.getCategorie());
+									livre.setTitre(l.getTitre());
+									livre.setNombredepages(l.getNombredepages());
+									livre.setNombreexemplaire(l.getNombreexemplaire() - 1);
+									
+						    	}
+						    	
+						    }
+						
+							bib.retour(r.getEmail(), r.getTitrelivre());
+							bib.reserver(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(), datedebut, datefin, r.getEmail(), r.getCode());
+							bib.prolongations(r.getEmail(), r.getTitrelivre(), 1);
+							
+							
+						return "confirmationP";
+					 }
+					 
+					 
+					 if(!listePr.isEmpty()) {
+						 
+						 for(Prolongation prolon : listePr) {
+							 if(prolon.getEmail().equalsIgnoreCase(p.getEmail()) && prolon.getTitrelivre().equalsIgnoreCase(p.getTitrelivre())) {
+								 
+								 if(prolon.getNombre() > 4) {
+									 return"nombredeProlongationAtteint";
+								 }
+								 
+								 if(prolon.getNombre() <= 4) {
+									 
+									 listeL = bib.listedeslivres();
+									   
+										bib.retour(r.getEmail(), r.getTitrelivre());
+										bib.reserver(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(), datedebut, datefin, r.getEmail(), r.getCode());
+										
+										int nbre = prolon.getNombre();
+										bib.supprimerprolongation(r.getEmail(), r.getTitrelivre());
+										bib.prolongations(r.getEmail(), r.getTitrelivre(), nbre + 1);
+										
+									return "confirmationP";
+								 }
+								 
+							 }
+							 
+							 if(prolon.getEmail().equalsIgnoreCase(p.getEmail()) && !prolon.getTitrelivre().equalsIgnoreCase(p.getTitrelivre())) {
+							
+								 	bib.retour(r.getEmail(), r.getTitrelivre());
+									bib.reserver(r.getNomutilisateur(), r.getPrenom(), r.getTitrelivre(), datedebut, datefin, r.getEmail(), r.getCode());
+									bib.prolongations(r.getEmail(), r.getTitrelivre(), 1);
+									
+							 }
+						 }
+						 
+					}
+				}
+			
 			}
+					 
 		}
-		
+					 
 		
 		return "mauvaisEMail";
-		
 	}
 }
