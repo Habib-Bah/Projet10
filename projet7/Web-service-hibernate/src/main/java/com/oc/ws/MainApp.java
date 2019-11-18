@@ -5,8 +5,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.xml.ws.Endpoint;
@@ -63,19 +65,7 @@ public class MainApp {
 		}
 		
 		*/
-		
-		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        String dateInString = "07/06/2013";
-
-        try {
-
-            Date date = formatter.parse(dateInString);
-            System.out.println(date);
-            System.out.println(formatter.format(date));
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+				
 	}
 
 }

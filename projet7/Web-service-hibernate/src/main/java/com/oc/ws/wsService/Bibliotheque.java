@@ -15,6 +15,7 @@ import javax.jws.WebService;
 import com.oc.ws.config.Configuration;
 import com.oc.ws.entity.Livre;
 import com.oc.ws.entity.Prolongation;
+import com.oc.ws.entity.Rappel;
 import com.oc.ws.entity.Reservation;
 import com.oc.ws.entity.Reservations;
 import com.oc.ws.entity.Utilisateur;
@@ -605,6 +606,76 @@ public class Bibliotheque {
 
 			statement = connection.createStatement();
 			String sql = "delete from prolongation where titrelivre like '" + titrelivre + "' and email like '" + email
+					+ "'";
+			statement.executeQuery(sql);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	@WebMethod(operationName = "listerappel")
+	public List<Rappel> listerappel() throws IOException {
+		List<Rappel> listeRap = new ArrayList<>();
+		Configuration conf = new Configuration();
+
+		try {
+
+			Class.forName("org.postgresql.Driver").newInstance();
+			connection = DriverManager.getConnection(conf.getMotDepasse());
+
+			statement = connection.createStatement();
+			String sql = "select * from rappel";
+			result = statement.executeQuery(sql);
+
+			while (result.next()) {
+				Rappel r = new Rappel();
+				r.setEmail(result.getString(1));
+				r.setTitrelivre(result.getString(2));
+				r.setDaterappel(result.getString(3));
+				listeRap.add(r);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return listeRap;
+	}
+	
+	@WebMethod(operationName = "envoyerRappel")
+	public void envoyerRappel(@WebParam(name = "email") String email,
+			@WebParam(name = "titrelivre") String titrelivre, @WebParam(name = "daterappel") String daterappel) throws IOException {
+		
+		Configuration conf = new Configuration();
+
+		try {
+
+			Class.forName("org.postgresql.Driver").newInstance();
+			connection = DriverManager.getConnection(conf.getMotDepasse());
+
+			statement = connection.createStatement();
+			String sql = "insert into rappel (email, titrelivre, daterappel) values ( '" + email + "', '" + titrelivre + "', '" + daterappel + "')";
+			statement.executeQuery(sql);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@WebMethod(operationName = "SupprimerRappel")
+	public void SupprimerRappel(@WebParam(name = "email") String email,
+			@WebParam(name = "titrelivre") String titrelivre) throws IOException {
+		
+		Configuration conf = new Configuration();
+
+		try {
+
+			Class.forName("org.postgresql.Driver").newInstance();
+			connection = DriverManager.getConnection(conf.getMotDepasse());
+
+			statement = connection.createStatement();
+			String sql = "delete from rappel where titrelivre like '" + titrelivre + "' and email like '" + email
 					+ "'";
 			statement.executeQuery(sql);
 
