@@ -683,4 +683,37 @@ public class Bibliotheque {
 			e.printStackTrace();
 		}
 	}
+	
+	@WebMethod(operationName = "listeReservationParLivre")
+	public List<Reservations> listeReservationParLivre(@WebParam(name = "titrelivre") String titrelivre) throws IOException {
+		List<Reservations> listeRes = new ArrayList<>();
+		Configuration conf = new Configuration();
+
+		try {
+
+			Class.forName("org.postgresql.Driver").newInstance();
+			connection = DriverManager.getConnection(conf.getMotDepasse());
+
+			statement = connection.createStatement();
+			String sql = "select * from reservations where titrelivre  like '" + titrelivre + "'";
+			result = statement.executeQuery(sql);
+
+			while (result.next()) {
+				Reservations r = new Reservations();
+				r.setNomutilisateur(result.getString(1));
+				r.setPrenom(result.getString(2));
+				r.setTitrelivre(result.getString(3));
+				r.setCode(result.getString(4));
+				r.setEmail(result.getString(5));
+				r.setNumero(result.getInt(6));
+
+				listeRes.add(r);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return listeRes;
+	}
 }
