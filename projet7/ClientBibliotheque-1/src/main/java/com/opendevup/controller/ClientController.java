@@ -178,7 +178,7 @@ public class ClientController {
 		
 		for(Reservations res : listeAttente) {
 			
-			if(res.getTitrelivre().equalsIgnoreCase(r.getTitrelivre())) {
+			if(res.getTitrelivre().equalsIgnoreCase(r.getTitrelivre()) && res.getEmail().equalsIgnoreCase(r.getEmail())) {
 				
 				
 				Reservations finale = new Reservations();
@@ -232,6 +232,10 @@ public class ClientController {
 				prets.add(pr);
 
 			}
+		}
+		
+		if(prets.isEmpty()) {
+			return "aucuneReservation";
 		}
 
 		model.addAttribute("prets", prets);
@@ -417,7 +421,7 @@ public class ClientController {
 
 						else {
 
-							if (listeAtt.size() >= 10) {
+							if (listeAtt.size() >= l.getNombreexemplaire() * 2) {
 								return "listecomplète";
 							}
 
@@ -516,7 +520,7 @@ public class ClientController {
 				}
 				if (p.getDatefin().compareTo(datedebut) == 0 || p.getDatefin().compareTo(datedebut) > 0) {
 
-					/*******************/
+					
 					List<Prolongation> listePr = bib.listeprolongations();
 
 					if (listePr.isEmpty()) {
@@ -591,5 +595,41 @@ public class ClientController {
 		}
 
 		return "mauvaisEMail";
+	}
+	
+	
+	@RequestMapping(value = "/Indisponible", method = RequestMethod.GET)
+	public String Indisponible(Model model) throws IOException_Exception {
+
+		BibliothequeService livreS = new BibliothequeService();
+		BibliotequeVilleWS bib = livreS.getBibliotequeVilleWSPort();
+
+		List<Livre> listelivre = new ArrayList<>();
+		List<Reservation> listeRR  = new ArrayList<>();
+		List<Reservation> listeReservation = new ArrayList<>();
+		
+		listelivre = bib.listedeslivres();
+		listeReservation = bib.listPret();
+	
+		
+
+		
+		for(Livre l : listelivre) {
+			if(l.getNombreexemplaire() == 0) {
+				for(Reservation r : listeReservation) {
+					if(r.getTitrelivre().equalsIgnoreCase(l.getTitre())) {
+						
+						listeRR.add(r);
+					}
+				}
+			}
+		}
+		
+		if(listeRR.isEmpty()) {
+			return "listeIndispoVide";
+		}
+		
+		model.addAttribute("listeIndispo", listeRR);
+		return "listeIndispo";
 	}
 }
