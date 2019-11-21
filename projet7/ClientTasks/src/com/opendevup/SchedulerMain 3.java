@@ -203,7 +203,7 @@ public class SchedulerMain extends TimerTask {
 						message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(res.getEmail()));
 						message.setSubject("Disponibilité de pret");
 						message.setText("Bonjour " + res.getPrenom() + ", le livre " + res.getTitrelivre()  + "que vous avez reservé est disponible."
-								+ " vous avez 24h pour venir le chercher. Passé ce delais, vous ne serez plus prioritaire sur ce livre. Bien cordialement.");
+								+ " vous avez 48h pour venir le chercher. Passé ce delais, vous ne serez plus prioritaire sur ce livre. Bien cordialement.");
 
 						Transport.send(message);
 
@@ -224,7 +224,7 @@ public class SchedulerMain extends TimerTask {
 			DateFormat df = new SimpleDateFormat(pattern);
 			Date today = Calendar.getInstance().getTime();
 			String daterappel = df.format(today);
-			today.setDate(today.getDate() + 1);
+			today.setDate(today.getDate() + 2);
 			String datefin = df.format(today);
 			if(rap.getDaterappel().compareTo(datefin) == 0) {
 				

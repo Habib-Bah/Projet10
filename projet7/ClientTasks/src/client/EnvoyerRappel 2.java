@@ -7,17 +7,18 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Classe Java pour Supprimerprolongation complex type.
+ * <p>Classe Java pour envoyerRappel complex type.
  * 
  * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.
  * 
  * <pre>
- * &lt;complexType name="Supprimerprolongation">
+ * &lt;complexType name="envoyerRappel">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="email" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="titrelivre" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="daterappel" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,14 +28,16 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Supprimerprolongation", propOrder = {
+@XmlType(name = "envoyerRappel", propOrder = {
     "email",
-    "titrelivre"
+    "titrelivre",
+    "daterappel"
 })
-public class Supprimerprolongation {
+public class EnvoyerRappel {
 
     protected String email;
     protected String titrelivre;
+    protected String daterappel;
 
     /**
      * Obtient la valeur de la propriété email.
@@ -82,6 +85,30 @@ public class Supprimerprolongation {
      */
     public void setTitrelivre(String value) {
         this.titrelivre = value;
+    }
+
+    /**
+     * Obtient la valeur de la propriété daterappel.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getDaterappel() {
+        return daterappel;
+    }
+
+    /**
+     * Définit la valeur de la propriété daterappel.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setDaterappel(String value) {
+        this.daterappel = value;
     }
 
 }
