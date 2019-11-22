@@ -14,6 +14,7 @@ import client.BibliothequeService;
 import client.IOException_Exception;
 import client.Livre;
 import client.Reservation;
+import client.Reservations;
 import client.Utilisateur;
 
 @RunWith(SpringRunner.class)
@@ -52,6 +53,16 @@ public class ClientBibliotheque1ApplicationTests {
 		
 		List<Reservation> listeReser = bib.listPret();
 		int taille = listeReser.size();
+		int res = 0;
+		assertEquals(res, taille);
+		
+	}
+	
+	@Test
+	public void testGetListReservations() throws IOException_Exception {
+		
+		List<Reservations> listeResers = bib.listAttente();
+		int taille = listeResers.size();
 		int res = 0;
 		assertEquals(res, taille);
 		
