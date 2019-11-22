@@ -1,0 +1,21 @@
+language: java
+
+sudo: required
+
+before_install:
+  - projet7/ClientBibliotheque-1/
+
+jobs:
+  include:
+    - stage: test
+      jdk: openjdk8
+      script:
+       - mvn test
+       - cd ../../ClientBibliotheque-1/
+
+after_success:
+  - mvn --file pom.xml cobertura:cobertura -P test-consumer,test-business
+  - bash <(curl -s https://codecov.io/bash)
+
+notifications:
+  email: false
