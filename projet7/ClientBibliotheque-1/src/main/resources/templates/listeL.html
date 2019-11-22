@@ -15,22 +15,32 @@
 			</h1>
 			<nav>
 				<ul>
-					<li><a th:href="@{/Reservation}"> Vos reservations</a></li>
-					<li><a th:href="@{/Prolonger}"> Prolonger un pret</a></li>
-					<li><a th:href="@{/Deconnection}"> Deconnection</a></li>
+					<li><a th:href="@{/Reservation}" class="boutton2"> Vos reservations</a></li>
+					<li><a th:href="@{/Prolonger}" class="boutton2"> Prolonger</a></li>
+					<li><a th:href="@{/Indisponible}" class="boutton2"> Indisponible </a></li>
+					<li><a th:href="@{/Attente}" class="boutton2"> Liste attente </a></li>
+					<li><a th:href="@{/Deconnection}" class="boutton2"> Deconnection </a></li>
 				</ul>
 			</nav>
 		</div>
 	</header>
+	
+	
+	<section id="contact">
+		<div class="conteneur">
+			<br><br>
+           <a th:href="@{/RetourDePret}" class="boutton2"> Retour de pret </a>
+            </div>
+	</section>
+	
 	<section id="contact">
 		<div class="conteneur">
 			<h3>Recherche rapide</h3>
 			<p>Trouver rapidement votre livre <br><br>
-			
             <a th:href="@{/Recherche}" class="boutton2"> Rechercher </a>
-
             </div>
 	</section>
+	
 
 
 	<section id="possibilités">
