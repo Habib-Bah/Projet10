@@ -68,6 +68,68 @@ public class ClientBibliotheque1ApplicationTests {
 		
 	}
 	
+	@Test
+	public void testGetLivreTitre() throws IOException_Exception {
+		
+		List<Livre> listeLivre = bib.listedeslivres();
+		boolean res = false;
+		for(Livre l : listeLivre) {
+			if(l.getTitre().equalsIgnoreCase("Les passions de papa")) {
+				res = true;
+			}
+		}
+		assertEquals(true, res);
+	}
 	
+	@Test
+	public void testGetLivreAuteur() throws IOException_Exception {
+		
+		List<Livre> listeLivre = bib.listedeslivres();
+		boolean res = false;
+		for(Livre l : listeLivre) {
+			if(l.getAuteur().equalsIgnoreCase("Hans Christian Andersen")) {
+				res = true;
+			}
+		}
+		assertEquals(true, res);
+	}
 
+	@Test
+	public void testUserName() throws IOException_Exception {
+		
+		List<Utilisateur> listeuser = bib.listUser();
+		boolean res = false;
+		for(Utilisateur u : listeuser) {
+			if(u.getNom().equalsIgnoreCase("SBah")) {
+				res = true;
+			}
+		}
+		assertEquals(true, res);
+	}
+	
+	@Test
+	public void testEmail() throws IOException_Exception {
+		
+		List<Utilisateur> listeuser = bib.listUser();
+		boolean res = false;
+		for(Utilisateur u : listeuser) {
+			if(u.getEmail().equalsIgnoreCase("habib@admin.fr")) {
+				res = true;
+			}
+		}
+		assertEquals(true, res);
+	}
+	
+	@Test
+	public void testUserRole() throws IOException_Exception {
+		
+		List<Utilisateur> listeuser = bib.listUser();
+		boolean res = false;
+		for(Utilisateur u : listeuser) {
+			if(u.getRole().equalsIgnoreCase("admin")) {
+				res = true;
+			}
+		}
+		assertEquals(true, res);
+	}
 }
