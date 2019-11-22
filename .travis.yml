@@ -4,7 +4,7 @@ sudo: required
 
 
 before_install:
-  - projet7/ClientBibliotheque-1/
+  - cd projet7/ClientBibliotheque-1/
 
 jobs:
   include:
