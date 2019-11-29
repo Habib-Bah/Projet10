@@ -226,10 +226,33 @@ public class SchedulerMain extends TimerTask {
 			String daterappel = df.format(today);
 			today.setDate(today.getDate() + 2);
 			String datefin = df.format(today);
+			List<Reservations> listr = new ArrayList<>();
+			
 			if(rap.getDaterappel().compareTo(datefin) == 0) {
 				
 				try {
-					bib.supprimerRappel(rap.getEmail(), rap.getTitrelivre());
+					
+					listr = bib.listAttente();
+					
+					for(Reservations reser1 : listr) {
+						Reservations finale = new Reservations();
+						finale.setEmail(reser1.getEmail());
+						finale.setNomutilisateur(reser1.getNomutilisateur());
+						finale.setPrenom(reser1.getPrenom());
+						finale.setTitrelivre(reser1.getTitrelivre());
+						finale.setNumero(reser1.getNumero());
+						finale.setCode(reser1.getCode());
+						if (finale.getNumero() == 1) {
+
+							bib.supprimerRappel(rap.getEmail(), rap.getTitrelivre());
+						} else {
+							bib.supprimerReservations(finale.getEmail(), finale.getTitrelivre());
+							bib.reserverEnAvance(finale.getNomutilisateur(), finale.getPrenom(),
+									finale.getTitrelivre(), finale.getEmail(), finale.getCode(),
+									finale.getNumero() - 1);
+						}
+					}
+					
 				} catch (IOException_Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

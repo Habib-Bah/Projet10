@@ -7,16 +7,6 @@ public class SchedulerCall {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		/*Timer timer = new Timer();
-		SchedulerMain scMain = new SchedulerMain();
-		
-		timer.scheduleAtFixedRate(scMain, 0, 5000);
-		
-		*/
-
-		
-		//int freq = conf.getFrequence();
-
 		Timer timer = new Timer();
 		SchedulerMain scMain = new SchedulerMain();
 		

@@ -7,17 +7,17 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Classe Java pour connexion complex type.
+ * <p>Classe Java pour Supprimerprolongation complex type.
  * 
  * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.
  * 
  * <pre>
- * &lt;complexType name="connexion">
+ * &lt;complexType name="Supprimerprolongation">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="email" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="motdepasse" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="titrelivre" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,14 +27,14 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "connexion", propOrder = {
+@XmlType(name = "Supprimerprolongation", propOrder = {
     "email",
-    "motdepasse"
+    "titrelivre"
 })
-public class Connexion {
+public class Supprimerprolongation {
 
     protected String email;
-    protected String motdepasse;
+    protected String titrelivre;
 
     /**
      * Obtient la valeur de la propriété email.
@@ -61,27 +61,27 @@ public class Connexion {
     }
 
     /**
-     * Obtient la valeur de la propriété motdepasse.
+     * Obtient la valeur de la propriété titrelivre.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getMotdepasse() {
-        return motdepasse;
+    public String getTitrelivre() {
+        return titrelivre;
     }
 
     /**
-     * Définit la valeur de la propriété motdepasse.
+     * Définit la valeur de la propriété titrelivre.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setMotdepasse(String value) {
-        this.motdepasse = value;
+    public void setTitrelivre(String value) {
+        this.titrelivre = value;
     }
 
 }

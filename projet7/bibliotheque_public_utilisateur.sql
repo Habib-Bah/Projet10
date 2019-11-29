@@ -1,0 +1,3 @@
+UPDATE public.utilisateur SET email = 'habib@admin.fr', motdepasse = '1111', nom = 'SBah', prenom = 'SHabib', role = 'admin', code = 'codeAdmin' WHERE id = 1000;
+UPDATE public.utilisateur SET email = 'thiernohabibbah@gmail.com', motdepasse = '1234', nom = 'Bah', prenom = 'Thierno', role = 'user', code = 'hcode' WHERE id = 8;
+UPDATE public.utilisateur SET email = 'zappelinikristelle@hotmail.fr', motdepasse = '1234', nom = 'Zappelini', prenom = 'Kristelle', role = 'user', code = 'zcode' WHERE id = 9;

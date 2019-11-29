@@ -1,0 +1,2 @@
+UPDATE public.app_user SET email = 'thiernohabibbah@gmail.com', enabled = 1, encryted_password = '1234', role = 'ROLE_USER', user_name = 'habib', code = null WHERE id = 1;
+UPDATE public.app_user SET email = 'email1', enabled = 1, encryted_password = '11111', role = 'ROLE_USER', user_name = 'test1', code = null WHERE id = 2;
